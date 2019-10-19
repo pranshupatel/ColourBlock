@@ -9,10 +9,10 @@ class Grid:
     """ GRID CLASS
         This class is a 20 x 10 list of nodes, to be displayed to the screen
 
-        === Private Variables === 
+        === Private Variables ===
         _Width - the size of the game window width in PIXELS
-        _Height - the size of the game window width in PIXELS 
-        _NODES - The list of nodes
+        _Height - the size of the game window width in PIXELS
+        _nodes - The list of nodes
         _padding - the amount of PIXELS between each node
         _colour - the default colour of all nodes in the grid
         _left_offset - the distance in PIXELS from the left edge of the game window
@@ -48,7 +48,7 @@ class Grid:
 
     def create_grid(self):
         """ Fill self._nodes with the array
-            Creates the nodes so that they are 
+            Creates the nodes so that they are
         """
         # the size of each node is 1/20 the height of the grid
         real_length = self._height // 20

@@ -43,6 +43,7 @@ def play():
 
     frame(screen, grid)
 
+
 def frame(screen: pygame.display , grid: Grid):
     """ Runs every frame of the game
 

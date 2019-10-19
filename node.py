@@ -7,7 +7,7 @@ from typing import List, Dict, Tuple
 class Node:
     """ NODE CLASS
         Represents a node on the 20 x 10 grid
-
+        Each node is 38 x 38 PIXELS long
         === Public Variables ===
         colour - The current colour of the node, can be changed
 
@@ -18,12 +18,12 @@ class Node:
     """
     colour: Tuple[int, int, int]
 
-    _position: Tuple[int]
+    _position: Tuple[int, int]
     _background_colour: str
     _length: int
 
-    def __init__(self, colour: Tuple[int, int, int], pos: Tuple[int], side_length: int):
-        """ Initialize a new node at a given position and colour. 
+    def __init__(self, colour: Tuple[int, int, int], pos: Tuple[int, int], side_length: int):
+        """ Initialize a new node at a given position and colour.
             Background is also set here
 
             pos is the TOP LEFT of the node
@@ -33,12 +33,12 @@ class Node:
         self._position = pos
         self._length = side_length
 
-    def get_position(self) -> Tuple[int]:
+    def get_position(self) -> Tuple[int, int]:
         """ Return the position of the node
         """
         return self._position
 
-    def get_colour(self) -> str:
+    def get_colour(self) -> Tuple:
         """ Return the colour of the node
         """
         return self.colour
@@ -58,6 +58,12 @@ class Node:
         """
         self.colour = self._background_colour
 
+    def move(self, x_coord, y_coord):
+        """
+        Move the current node x_coord, y_coord away from current position
+        """
+        self._position = (self._position[0]+x_coord, self._position[1]+y_coord)
+
     def __str__(self):
         """ String representation of a node object
             -> node at [self.position]
@@ -70,4 +76,3 @@ class Node:
             -> node at [self.position]
         """
         return self.__str__()
-        
