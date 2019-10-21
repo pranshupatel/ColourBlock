@@ -90,15 +90,9 @@ class Character:
         """ Update the history of this character after the current game is complete."""
 
         # CURRENTLY ABSTRACT
-<<<<<<< HEAD
         if self.get_grid.isGameOver():
-=======
-        """
-        if grid.isGameOver():
->>>>>>> 8047af05da271d2b94f0ec74d84df19301128506
             self._history.append(self._score)
-        """
-
+			
     def update_score(self):
         """ Update the current score accordingly once the grid detects a line is full. """
         # NEEDS TO BE IMPLEMENTED
