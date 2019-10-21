@@ -44,8 +44,10 @@ class Character:
         """ Update the history of this character after the current game is complete."""
 
         # CURRENTLY ABSTRACT
+        """
         if grid.isGameOver():
             self._history.append(self._score)
+        """
 
     def update_score(self):
         """ Update the current score accordingly once the grid detects a line is full. """
