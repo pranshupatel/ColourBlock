@@ -23,58 +23,67 @@ FONT = 'Consolas'
 """ === CLOCK SPEED """
 TICK_LENGTH = 500
 
-def play():
-    """ Create a Grid and play the game
-    """
-    # Start pygame
-    pygame.init()
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Colour Block")
+class Visuals:
 
-    colour = (0, 32, 64)
-    padding = 1
+    def Visuals(self):
+        """ There are no needed variables for this class
+        """
+        pass
 
-    # to centre, take centre of screen then subtract the grid's width (which is HEIGHT // 2)
-    left_offset = (WIDTH - (HEIGHT // 2)) // 2
+    def play(self, grid: Grid):
+        """ Set up a pygame window with the passed in grid """
+        # Start pygame
+        pygame.init()
+        screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_caption("Colour Block")
 
-    print(left_offset)
+        colour = (0, 32, 64)
+        padding = 1
 
-    grid = Grid(WIDTH, HEIGHT, padding, colour, left_offset)
+        # to centre, take centre of screen then subtract the grid's width (which is HEIGHT // 2)
+        left_offset = (WIDTH - (HEIGHT // 2)) // 2
 
-    frame(screen, grid)
+        print(left_offset)
+
+        self.frame(screen, grid)
 
 
-def frame(screen: pygame.display , grid: Grid):
-    """ Runs every frame of the game
+    def frame(self, screen: pygame.display , grid: Grid):
+        """ Runs every frame of the game
 
-        Takes in a grid to display
-    """
+            Takes in a grid to display
+        """
+        print("frame 0")
 
-    while(True):
-        pygame.time.delay(TICK_LENGTH)
+        while(True):
+            pygame.time.delay(TICK_LENGTH)
+            print("tick")
+            self.render_grid(screen, grid)
+            for event in pygame.event.get():
+                # go through all events on pygame
+                if event.type == pygame.QUIT:
+                    # user closed the window
+                    print("user closed game")
+                    # stop the game
+                    pygame.quit()
+                    exit()
 
-        render_grid(screen, grid)
-        for event in pygame.event.get():
-            # go through all events on pygame
-            if event.type == pygame.QUIT:
-                # user closed the window
-                print("user closed game")
-                # stop the game
-                pygame.quit()
-                exit()
+    def render_grid(self, screen: pygame.display, grid: Grid):
+        """ Draw the grid on a pygame window
+        """
+        nodes = grid.get_nodes()
+        for line in nodes:
+            for node in line:
+                pos = node.get_position()
+                colour = node.get_colour()
+                length = node.get_length()
 
-def render_grid(screen: pygame.display, grid: Grid):
-    """ Draw the grid on a pygame window
-    """
-    nodes = grid.get_nodes()
-    for line in nodes:
-        for node in line:
-            pos = node.get_position()
-            colour = node.get_colour()
-            length = node.get_length()
-
-            pygame.draw.rect(screen, colour, (pos[0], pos[1], length, length))
-    pygame.display.update()
+                pygame.draw.rect(screen, colour, (pos[0], pos[1], length, length))
+        pygame.display.update()
 
 if __name__ == "__main__":
-    play()
+    left_offset = (WIDTH - (HEIGHT // 2)) // 2
+    grid = Grid(WIDTH, HEIGHT, 1, (0,32,64), left_offset)
+    
+    v = Visuals()
+    v.play(grid)
