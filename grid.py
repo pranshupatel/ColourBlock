@@ -7,7 +7,9 @@ from node import Node
 
 class Grid:
     """ GRID CLASS
-        This class is a 20 x 10 list of nodes, to be displayed to the screen
+        This class is a 24 x 10 list of nodes, 
+		though only 20 x 10 to be displayed to the screen
+		(This is done so new blocks are spawned off screen)
 
         === Private Variables ===
         _Width - the size of the game window width in PIXELS
@@ -53,9 +55,13 @@ class Grid:
         if length < 1:
             length = 1
 
+		# NOTE:
+		# pos x and y need to be init 1 space before they start
+		# so that when they increment the first node is in the 
+		# correct place
         pos_x = self._left_offset - real_length
-        pos_y = -real_length
-        for x in range(20):
+        pos_y = -real_length * 5
+        for x in range(24):
             self._nodes.append([])
             pos_y += real_length
             for y in range(10):
@@ -67,6 +73,7 @@ class Grid:
                 pos = (pos_x, pos_y)
                 node = Node(self._colour, pos, length)
                 self._nodes[x].append(node)
+			# reset x to left
             pos_x = self._left_offset - real_length
 
     def print_grid(self):

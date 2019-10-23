@@ -17,7 +17,7 @@ HEIGHT = 600 # 768 #
 FONT = 'Consolas'
 
 """ === CLOCK SPEED === """
-TICK_LENGTH = 500
+TICK_LENGTH = 750
 
 """ BACKGROUND COLOUR """
 COLOUR = (0, 32, 64)

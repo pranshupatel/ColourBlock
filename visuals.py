@@ -55,13 +55,8 @@ class Visuals:
         screen = pygame.display.set_mode((self._width, self._height))
         pygame.display.set_caption("Colour Block")
 
-        # colour = (0, 32, 64)
-        # padding = 1
-
         # to centre, take centre of screen then subtract the grid's width (which is HEIGHT // 2)
         left_offset = (self._width - (self._height // 2)) // 2
-
-        # print(left_offset)
 
         self.frame(screen, grid)
 
@@ -75,7 +70,6 @@ class Visuals:
 
             Takes in a grid to display
         """
-        print("frame 0")
 
         while(True):
             # timer for when to update
@@ -96,7 +90,11 @@ class Visuals:
         """ Draw the grid on a pygame window
         """
         nodes = grid.get_nodes()
-        for line in nodes:
+
+        # NOTE: Render only the bottom 20 
+        #       This is so new blocks can be spawned 
+        #       Out of the players view
+        for line in nodes[4:]:
             for node in line:
                 pos = node.get_position()
                 colour = node.get_colour()
