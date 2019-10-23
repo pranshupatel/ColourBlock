@@ -4,12 +4,14 @@ from block import Block
 from visuals import Visuals
 import pygame
 
-""" === CONSTANTS === """
+""" ===== CONSTANTS ===== """
+
+""" === ORIGIN ==="""
 ORIGIN = (0, 0)
 
 """ === Resolution === """
-WIDTH = 1024
-HEIGHT = 768
+WIDTH = 400 # 1024 #
+HEIGHT = 600 # 768 #
 
 """ === FONT === """
 FONT = 'Consolas'
@@ -21,7 +23,7 @@ TICK_LENGTH = 500
 COLOUR = (0, 32, 64)
 
 """ PADDING """
-PADDING = 1
+PADDING = 5
 
 """ Author: Pranshu Patel """
 class Character:
@@ -54,7 +56,7 @@ class Character:
         self._time = time
         self._score = 0
         self._history = []
-        self._vis = Visuals()
+        self._vis = Visuals(WIDTH, HEIGHT, TICK_LENGTH, FONT)
         self.setup_grid()
         self.start_game()
 

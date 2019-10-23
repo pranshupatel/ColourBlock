@@ -37,12 +37,7 @@ class Grid:
         self._height = height
         self._nodes = []
         self._padding = padding
-        self.colour = colour
-        # if(offset):
-        #     self._left_offset = offset
-        # else:
-        #     self._left_offset = 0
-
+        self._colour = colour
         self._left_offset = offset
         self.create_grid()
 
@@ -70,7 +65,7 @@ class Grid:
                 pos_x += real_length
 
                 pos = (pos_x, pos_y)
-                node = Node(self.colour, pos, length)
+                node = Node(self._colour, pos, length)
                 self._nodes[x].append(node)
             pos_x = self._left_offset - real_length
 

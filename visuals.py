@@ -10,43 +10,65 @@ import pygame
 from grid import Grid
 from node import Node
 
-""" === CONSTANTS === """
-ORIGIN = (0, 0)
+# """ === CONSTANTS === """
+# ORIGIN = (0, 0)
 
-""" === Resolution === """
-WIDTH = 1024
-HEIGHT = 768
+# """ === Resolution === """
+# WIDTH = 1024
+# HEIGHT = 768
 
-""" === FONT === """
-FONT = 'Consolas'
+# """ === FONT === """
+# FONT = 'Consolas'
 
-""" === CLOCK SPEED """
-TICK_LENGTH = 500
+# """ === CLOCK SPEED """
+# TICK_LENGTH = 500
 
 class Visuals:
+    """ This class is the front end of the game
+        It is meant to be able to take in a grid and render it 
 
-    def Visuals(self):
+
+        === PRIVATES ===
+        _width: the width of the window in PIXELS
+        _height: the height of the window in PIXELS
+        _tick_lenth: the ms between each update
+        _font: the font to use in pygame
+    """
+
+    _width: int
+    _height: int
+    _tick_length: int
+    _font: str
+
+    def __init__(self, width: int, height: int, tick: int, font: str):
         """ There are no needed variables for this class
         """
-        pass
+        self._width = width
+        self._height = height
+        self._tick_length = tick
+        self._font = font
 
     def play(self, grid: Grid):
         """ Set up a pygame window with the passed in grid """
         # Start pygame
         pygame.init()
-        screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        screen = pygame.display.set_mode((self._width, self._height))
         pygame.display.set_caption("Colour Block")
 
-        colour = (0, 32, 64)
-        padding = 1
+        # colour = (0, 32, 64)
+        # padding = 1
 
         # to centre, take centre of screen then subtract the grid's width (which is HEIGHT // 2)
-        left_offset = (WIDTH - (HEIGHT // 2)) // 2
+        left_offset = (self._width - (self._height // 2)) // 2
 
-        print(left_offset)
+        # print(left_offset)
 
         self.frame(screen, grid)
 
+    def update_tick(self, new_tick:int):
+        """ Update the tick length to the new tick length
+        """
+        self._tick_length = new_tick
 
     def frame(self, screen: pygame.display , grid: Grid):
         """ Runs every frame of the game
@@ -56,8 +78,10 @@ class Visuals:
         print("frame 0")
 
         while(True):
-            pygame.time.delay(TICK_LENGTH)
-            print("tick")
+            # timer for when to update
+            pygame.time.delay(self._tick_length)
+            
+            # pull from grid
             self.render_grid(screen, grid)
             for event in pygame.event.get():
                 # go through all events on pygame
@@ -80,10 +104,3 @@ class Visuals:
 
                 pygame.draw.rect(screen, colour, (pos[0], pos[1], length, length))
         pygame.display.update()
-
-if __name__ == "__main__":
-    left_offset = (WIDTH - (HEIGHT // 2)) // 2
-    grid = Grid(WIDTH, HEIGHT, 1, (0,32,64), left_offset)
-    
-    v = Visuals()
-    v.play(grid)
