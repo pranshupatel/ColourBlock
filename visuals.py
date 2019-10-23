@@ -55,9 +55,6 @@ class Visuals:
         screen = pygame.display.set_mode((self._width, self._height))
         pygame.display.set_caption("Colour Block")
 
-        # to centre, take centre of screen then subtract the grid's width (which is HEIGHT // 2)
-        left_offset = (self._width - (self._height // 2)) // 2
-
         self.frame(screen, grid)
 
     def update_tick(self, new_tick:int):

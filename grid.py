@@ -87,6 +87,27 @@ class Grid:
         """
         return self._nodes
 
+    def is_line_full(self, index: int):
+        """ Return true iff line at index is full
+            i.e. : the colours of each node is different 
+                    than the background colour 
+        """
+		# go through the row, see if any not occupied
+        for node in self._nodes[index]:
+            if node.get_colour() == self._colour:
+                return False
+        # all blocks are different colours
+        return True
+
+    def is_game_over(self):
+        """ return True iff there is a block at the top row
+            Thus new blocks can not full
+        """
+        for node in self._nodes[4]:
+            if node.get_colour() != self._colour:
+                return True
+        return False
+
 if __name__ == "__main__":
     # debug the class
     red = (255, 0, 0)
