@@ -18,6 +18,7 @@ class Grid:
         _padding - the amount of PIXELS between each node
         _colour - the default colour of all nodes in the grid
         _left_offset - the distance in PIXELS from the left edge of the game window
+        _score - the players score so far
     """
 
     _width: int
@@ -26,6 +27,7 @@ class Grid:
     _padding: int
     _colour: Tuple[int, int, int]
     _left_offset: int
+    _score: int
 
     def __init__(self, width: int, height: int, padding, colour: Tuple[int, int, int], offset=0):
         """ Create a new grid based on the resolution of the game window
@@ -41,6 +43,7 @@ class Grid:
         self._padding = padding
         self._colour = colour
         self._left_offset = offset
+        self._score = 0
         self.create_grid()
 
     def create_grid(self):
@@ -87,6 +90,11 @@ class Grid:
         """
         return self._nodes
 
+    def get_score(self):
+        """ Return the total score of the current game
+        """
+        return self._score
+
     def is_line_full(self, index: int):
         """ Return true iff line at index is full
             i.e. : the colours of each node is different 
@@ -100,7 +108,7 @@ class Grid:
         return True
 
     def is_game_over(self):
-        """ return True iff there is a block at the top row
+        """ Return True iff there is a block at the top row
             Thus new blocks can not full
         """
         for node in self._nodes[4]:
