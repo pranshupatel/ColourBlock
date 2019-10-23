@@ -10,19 +10,6 @@ import pygame
 from grid import Grid
 from node import Node
 
-# """ === CONSTANTS === """
-# ORIGIN = (0, 0)
-
-# """ === Resolution === """
-# WIDTH = 1024
-# HEIGHT = 768
-
-# """ === FONT === """
-# FONT = 'Consolas'
-
-# """ === CLOCK SPEED """
-# TICK_LENGTH = 500
-
 class Visuals:
     """ This class is the front end of the game
         It is meant to be able to take in a grid and render it 
@@ -48,7 +35,7 @@ class Visuals:
         self._tick_length = tick
         self._font = font
 
-    def play(self, grid: Grid):
+    def play(self, grid: Grid) -> None:
         """ Set up a pygame window with the passed in grid """
         # Start pygame
         pygame.init()
@@ -57,12 +44,12 @@ class Visuals:
 
         self.frame(screen, grid)
 
-    def update_tick(self, new_tick:int):
+    def update_tick(self, new_tick:int) -> None:
         """ Update the tick length to the new tick length
         """
         self._tick_length = new_tick
 
-    def frame(self, screen: pygame.display , grid: Grid):
+    def frame(self, screen: pygame.display , grid: Grid) -> None:
         """ Runs every frame of the game
 
             Takes in a grid to display
@@ -72,7 +59,6 @@ class Visuals:
             i.set_colour((0,255,0))
 
         while(True):
-            frame_count += 1
             # timer for when to update
             pygame.time.delay(self._tick_length)
             
@@ -87,7 +73,7 @@ class Visuals:
                     pygame.quit()
                     exit()
 
-    def render_grid(self, screen: pygame.display, grid: Grid):
+    def render_grid(self, screen: pygame.display, grid: Grid) -> None:
         """ Draw the grid on a pygame window
         """
         nodes = grid.get_nodes()

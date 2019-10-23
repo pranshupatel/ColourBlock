@@ -46,7 +46,7 @@ class Grid:
         self._score = 0
         self.create_grid()
 
-    def create_grid(self):
+    def create_grid(self) -> None:
         """ Fill self._nodes with the array
             Creates the nodes so that they are
         """
@@ -79,23 +79,23 @@ class Grid:
 			# reset x to left
             pos_x = self._left_offset - real_length
 
-    def print_grid(self):
+    def print_grid(self) -> None:
         """ Print the grid in a readable way
         """
         for i in self._nodes:
             print(i)
 
-    def get_nodes(self):
+    def get_nodes(self) -> List[List[Node]]:
         """ Return the nodes of the grids
         """
         return self._nodes
 
-    def get_score(self):
+    def get_score(self) -> int:
         """ Return the total score of the current game
         """
         return self._score
 
-    def is_line_full(self, index: int):
+    def is_line_full(self, index: int) -> bool:
         """ Return true iff line at index is full
             i.e. : the colours of each node is different 
                     than the background colour 
@@ -107,7 +107,7 @@ class Grid:
         # all blocks are different colours
         return True
 
-    def is_game_over(self):
+    def is_game_over(self) -> bool:
         """ Return True iff there is a block at the top row
             Thus new blocks can not full
         """
@@ -116,14 +116,14 @@ class Grid:
                 return True
         return False
 
-    def reset_row(self, index: int):
+    def reset_row(self, index: int) -> None:
         """ Make the nodes of row <index> the 
             Background colour again
         """
         for i in range(len(self._nodes[index])):
             self._nodes[index][i].reset_colour()
 
-    def clear_lines(self):
+    def clear_lines(self) -> None:
         """ Clear any lines that are full
             Add to score as needed
         """
@@ -139,11 +139,3 @@ class Grid:
         # increase score according to project plan
         self._score += 50 * (2 ** lines_cleared)
 
-if __name__ == "__main__":
-    # debug the class
-    red = (255, 0, 0)
-    width = 1024
-    height = 768
-    padding = 0
-    g = Grid(width, height, padding, red)
-    g.print_grid()
