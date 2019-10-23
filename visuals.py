@@ -68,7 +68,11 @@ class Visuals:
             Takes in a grid to display
         """
 
+        for i in grid.get_nodes()[8]:
+            i.set_colour((0,255,0))
+
         while(True):
+            frame_count += 1
             # timer for when to update
             pygame.time.delay(self._tick_length)
             

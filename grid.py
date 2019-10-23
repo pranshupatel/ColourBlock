@@ -116,6 +116,29 @@ class Grid:
                 return True
         return False
 
+    def reset_row(self, index: int):
+        """ Make the nodes of row <index> the 
+            Background colour again
+        """
+        for i in range(len(self._nodes[index])):
+            self._nodes[index][i].reset_colour()
+
+    def clear_lines(self):
+        """ Clear any lines that are full
+            Add to score as needed
+        """
+        lines_cleared = 0
+
+        # go through the bottom rows
+        for i in range(len(self.get_nodes())):
+            if self.is_line_full(i):
+                # line is full
+                self.reset_row(i)
+                lines_cleared += 1
+
+        # increase score according to project plan
+        self._score += 50 * (2 ** lines_cleared)
+
 if __name__ == "__main__":
     # debug the class
     red = (255, 0, 0)
