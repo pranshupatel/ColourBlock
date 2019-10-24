@@ -4,6 +4,7 @@
 
 from typing import List, Dict, Tuple
 
+
 class Node:
     """ NODE CLASS
         Represents a node on the 20 x 10 grid
@@ -57,12 +58,6 @@ class Node:
         """ Reset the node to the background colour
         """
         self.colour = self._background_colour
-
-    def move(self, x_coord, y_coord):
-        """
-        Move the current node x_coord, y_coord away from current position
-        """
-        self._position = (self._position[0]+x_coord, self._position[1]+y_coord)
 
     def __str__(self):
         """ String representation of a node object

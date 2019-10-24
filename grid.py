@@ -7,7 +7,7 @@ from node import Node
 
 class Grid:
     """ GRID CLASS
-        This class is a 24 x 10 list of nodes, 
+        This class is a 24 x 10 list of nodes,
 		though only 20 x 10 to be displayed to the screen
 		(This is done so new blocks are spawned off screen)
 
@@ -23,7 +23,7 @@ class Grid:
 
     _width: int
     _height: int
-    _nodes: List[List] #of Nodes
+    _nodes: List[List[Node]] #of Nodes
     _padding: int
     _colour: Tuple[int, int, int]
     _left_offset: int
@@ -60,7 +60,7 @@ class Grid:
 
 		# NOTE:
 		# pos x and y need to be init 1 space before they start
-		# so that when they increment the first node is in the 
+		# so that when they increment the first node is in the
 		# correct place
         pos_x = self._left_offset - real_length
         pos_y = -real_length * 5
@@ -85,6 +85,9 @@ class Grid:
         for i in self._nodes:
             print(i)
 
+    def get_colour(self):
+        return self._colour
+
     def get_nodes(self) -> List[List[Node]]:
         """ Return the nodes of the grids
         """
@@ -97,8 +100,8 @@ class Grid:
 
     def is_line_full(self, index: int) -> bool:
         """ Return true iff line at index is full
-            i.e. : the colours of each node is different 
-                    than the background colour 
+            i.e. : the colours of each node is different
+                    than the background colour
         """
 		# go through the row, see if any not occupied
         for node in self._nodes[index]:
@@ -117,7 +120,7 @@ class Grid:
         return False
 
     def reset_row(self, index: int) -> None:
-        """ Make the nodes of row <index> the 
+        """ Make the nodes of row <index> the
             Background colour again
         """
         for i in range(len(self._nodes[index])):
