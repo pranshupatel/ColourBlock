@@ -35,7 +35,7 @@ class Grid:
 
             ASSUMES: height is smaller than width
 
-            ALL GRIDS WILL BE 20 X 10
+            ALL GRIDS WILL BE 24 X 10
         """
         self._width = width
         self._height = height

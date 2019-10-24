@@ -113,4 +113,4 @@ class Character:
         self.rotate()
 
 if __name__ == "__main__":
-    player = Character("test1", 500)
+    player = Character("player 1", 500)
