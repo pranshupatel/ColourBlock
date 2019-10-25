@@ -63,9 +63,12 @@ class Visuals:
             Takes in a grid to display
         """
 
+        # store ref for what action to take next tick
+        actions = "_"
+
         while(True):
             # timer for when to update
-            pygame.time.delay(self._tick_length)
+            # pygame.time.delay(self._tick_length)
             
             # pull from grid
             self.render_grid(screen, grid)
@@ -84,28 +87,34 @@ class Visuals:
             #if event.key == pygame.K_LEFT:
             if key[pygame.K_LEFT]:
                 # user hit left key
-                if self._char:
-                    # move block left
-                    self._char.play_move(-1, False)
-            if key[pygame.K_RIGHT]:
+                actions = "left"
+            elif key[pygame.K_RIGHT]:
                 # user pressed right key
-                if self._char:
-                    # move block right
-                    self._char.play_move(1, False)
-            if key[pygame.K_UP]:
+                actions = "right"
+            elif key[pygame.K_UP]:
                 # user pressed up key
-                if self._char:
-                    # rotate block
-                    self._char.play_move(0, False)
-            if key[pygame.K_DOWN]:
+                actions = "rotate"
+            elif key[pygame.K_DOWN]:
                 # user pressed down key
-                if self._char:
-                    # speed down block fall
-                    self._char.play_move(-8, True)
+                actions = "down"
 
-            # Move blocks down now that they have moved
-            if self._char:
-                self._char.block_fall()
+            # Time to update the grid
+            if pygame.time.get_ticks() % self._tick_length == 0:
+
+                # Move blocks down now that they have moved
+                if self._char:
+                    self._char.block_fall()
+
+                    # begin switch case
+                    if actions == "left":
+                        self._char.play_move(-1)
+                    elif actions == "right":
+                        self._char.play_move(1)
+                    elif actions == "rotate":
+                        self._char.play_move(rotate=True)
+                    elif actions == "down":
+                        self._char.play_move(speed_down=True)
+                    actions = "_"
 
     def render_grid(self, screen: pygame.display, grid: Grid) -> None:
         """ Draw the grid on a pygame window

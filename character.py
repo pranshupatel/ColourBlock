@@ -155,16 +155,16 @@ class Character:
         
         print("block = ", self._block)
                 
-    def play_move(self, move: int, speed_down=False) -> None:
+    def play_move(self, move=0, speed_down=False, rotate=False) -> None:
         """ Play one move in the game
 
             move represents the players move direction
             -1: move block left
              1: move block right
-             0: Rotate the block
              anything else do nothing
 
             rotate: if true, rotate the block
+            speed down: if true blocks falls at faster rate
         """
         if not self._block:
             print("no block")
@@ -173,18 +173,21 @@ class Character:
         if speed_down:
             # add implementation
             pass
-        else:
-            if move == -1:
-                self._block.move_left()
-            elif move == 0:
-                self._block.rotate()
-            elif move == 1:
-                self._block.move_right()
+        if move == -1:
+            self._block.move_left()
+        elif move == 0:
+            self._block.rotate()
+        elif move == 1:
+            self._block.move_right()
 
     def block_fall(self):
         """ Move the current block down by 1 row
             If it can, otherwise make new block
         """
+        # do nothing if there is no block
+        if not self._block:
+            return
+
         # NOTE: check if block can move down
         lowest_y = 0
         # store ref to grid's background colour for later
@@ -196,10 +199,14 @@ class Character:
             x = pos[0]
             y = pos[1]
             grid_nodes = self._grid.get_nodes()
-
+        
             # NOTE: int div to round down
-            if y >= HEIGHT // 20 * 20:
+            if y >= HEIGHT // 20 * 19:
                 # bottom of grid, do not go down
+                # stop control of block
+                self._block = None
+
+                print(self._block)
                 return
             # Add way to check nodes below it
 
