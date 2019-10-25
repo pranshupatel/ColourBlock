@@ -4,6 +4,25 @@
 """
 from typing import List, Dict, Tuple
 from node import Node
+from random import randint as rand
+
+# NOTE: below doesn't work since import is circular
+# from block import Block
+# from iblock import IBlock
+# from l_oppositeblock import L_oppositeBlock
+# from lblock import LBlock
+# from squareblock import SquareBlock
+# from tblock import TBlock
+# from z_oppositeBlock import Z_oppositeBlock
+# from zblock import ZBlock
+# import block
+# import iblock
+# import l_oppositeblock
+# import lblock
+# import squareblock
+# import tblock
+# import z_oppositeBlock
+# import zblock
 
 class Grid:
     """ GRID CLASS

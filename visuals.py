@@ -20,20 +20,28 @@ class Visuals:
         _height: the height of the window in PIXELS
         _tick_lenth: the ms between each update
         _font: the font to use in pygame
+        _char: the character class this game is using
     """
 
     _width: int
     _height: int
     _tick_length: int
     _font: str
+    _char: None # By Default, will be type character if not None
 
-    def __init__(self, width: int, height: int, tick: int, font: str):
-        """ There are no needed variables for this class
+    def __init__(self, width: int, height: int, tick: int, font: str, controller=None):
+        """ Width, height, tick speed and font for the pygame window
+            Controller refers to the character class if one is assinged
+            This allows us to update the script of any user input
+
         """
         self._width = width
         self._height = height
         self._tick_length = tick
         self._font = font
+        self._char = None
+        if controller:
+            self._char = controller
 
     def play(self, grid: Grid) -> None:
         """ Set up a pygame window with the passed in grid """
@@ -69,6 +77,35 @@ class Visuals:
                     # stop the game
                     pygame.quit()
                     exit()
+
+            key = pygame.key.get_pressed()
+
+            # User pressed a key
+            #if event.key == pygame.K_LEFT:
+            if key[pygame.K_LEFT]:
+                # user hit left key
+                if self._char:
+                    # move block left
+                    self._char.play_move(-1, False)
+            if key[pygame.K_RIGHT]:
+                # user pressed right key
+                if self._char:
+                    # move block right
+                    self._char.play_move(1, False)
+            if key[pygame.K_UP]:
+                # user pressed up key
+                if self._char:
+                    # rotate block
+                    self._char.play_move(0, False)
+            if key[pygame.K_DOWN]:
+                # user pressed down key
+                if self._char:
+                    # speed down block fall
+                    self._char.play_move(-8, True)
+
+            # Move blocks down now that they have moved
+            if self._char:
+                self._char.block_fall()
 
     def render_grid(self, screen: pygame.display, grid: Grid) -> None:
         """ Draw the grid on a pygame window

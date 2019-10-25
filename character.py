@@ -1,8 +1,18 @@
 from typing import List, Dict, Tuple
 from grid import Grid
-from block import Block
 from visuals import Visuals
+from random import randint as rand
 import pygame
+
+# import all the blocks
+import block
+import iblock
+import l_oppositeblock
+import lblock
+import squareblock
+import tblock
+import z_oppositeBlock
+import zblock
 
 """ ===== CONSTANTS ===== """
 
@@ -17,7 +27,7 @@ HEIGHT = 600 # 768 #
 FONT = 'Consolas'
 
 """ === CLOCK SPEED === """
-TICK_LENGTH = 750
+TICK_LENGTH = 500
 
 """ BACKGROUND COLOUR """
 COLOUR = (0, 32, 64)
@@ -35,7 +45,7 @@ class Character:
         _time - The amount of seconds the character has been in the game.
         _score - The current score of the character.
         _history - A list containing all the scores that the character achieved in all previoius games played.
-        _curr_block - The current block that the character is in control of.
+        _block - The current block that the character is in control of.
 		
 		_grid - The grid that the current game is using
 		_vis - The visuals for the game
@@ -44,7 +54,7 @@ class Character:
     _time: int
     _score: int
     _history: List[int]
-    _curr_block: Block
+    _block: block.Block
     _grid: Grid
     _vis: Visuals
 
@@ -56,7 +66,8 @@ class Character:
         self._time = time
         self._score = 0
         self._history = []
-        self._vis = Visuals(WIDTH, HEIGHT, TICK_LENGTH, FONT)
+        self._vis = Visuals(WIDTH, HEIGHT, TICK_LENGTH, FONT, self)
+        self._block = None
         self.setup_grid()
         self.start_game()
 
@@ -69,7 +80,10 @@ class Character:
     def start_game(self):
         """ Start pygame with this game """
         print("starting game")
+        self.create_block()
+
         self._vis.play(self._grid)
+
 
     def get_name(self) -> str:
         """ Return the name of this character. """
@@ -100,17 +114,96 @@ class Character:
         # NEEDS TO BE IMPLEMENTED
         pass
 
-    def move_block_left(self):
-        """ Move the current block to the left by 1 unit."""
-        self._block.move_left()
+    # def move_block_left(self):
+    #     """ Move the current block to the left by 1 unit."""
+    #     self._block.move_left()
 
-    def move_block_right(self):
-        """ Move the current block to the right by 1 unit."""
-        self._block.move_right()
+    # def move_block_right(self):
+    #     """ Move the current block to the right by 1 unit."""
+    #     self._block.move_right()
 
-    def rotate_block(self):
-        """ Rotate the current block 90 degrees clockwise."""
-        self.rotate()
+    # def rotate_block(self):
+    #     """ Rotate the current block 90 degrees clockwise."""
+    #     self.rotate()
+
+    def create_block(self) -> None:
+        """ Spawn in a random block in the 
+            top rows of the grid
+        """
+        # DO NOT MAKE A NEW BLOCK
+        # TILL THE OLD ONE IS GONE
+        if self._block:
+            return
+
+        block_type = rand(0, 6)
+        print("block type = ", block_type)
+        # begin switch case
+        if block_type == 0:
+            self._block = iblock.IBlock(self._grid)
+        elif block_type == 1:
+            self._block = l_oppositeblock.L_oppositeBlock(self._grid)
+        elif block_type == 2:
+            self._block = lblock.LBlock(self._grid)
+        elif block_type == 3:
+            self._block = squareblock.SquareBlock(self._grid)
+        elif block_type == 4:
+            self._block = tblock.TBlock(self._grid)
+        elif block_type == 5:
+            self._block = z_oppositeBlock.Z_oppositeBlock(self._grid)
+        elif block_type == 6:
+            self._block = zblock.ZBlock(self._grid)
+        
+        print("block = ", self._block)
+                
+    def play_move(self, move: int, speed_down=False) -> None:
+        """ Play one move in the game
+
+            move represents the players move direction
+            -1: move block left
+             1: move block right
+             0: Rotate the block
+             anything else do nothing
+
+            rotate: if true, rotate the block
+        """
+        if not self._block:
+            print("no block")
+            return
+
+        if speed_down:
+            # add implementation
+            pass
+        else:
+            if move == -1:
+                self._block.move_left()
+            elif move == 0:
+                self._block.rotate()
+            elif move == 1:
+                self._block.move_right()
+
+    def block_fall(self):
+        """ Move the current block down by 1 row
+            If it can, otherwise make new block
+        """
+        # NOTE: check if block can move down
+        lowest_y = 0
+        # store ref to grid's background colour for later
+        colour = self._grid.get_colour()
+        for node in self._block._nodes:
+            # get pos from the node
+            # NOTE: pos is in pixel coordinates
+            pos = node.get_position()
+            x = pos[0]
+            y = pos[1]
+            grid_nodes = self._grid.get_nodes()
+
+            # NOTE: int div to round down
+            if y >= HEIGHT // 20 * 20:
+                # bottom of grid, do not go down
+                return
+            # Add way to check nodes below it
+
+        self._block.traverse_down_1row()
 
 if __name__ == "__main__":
     player = Character("player 1", 500)
