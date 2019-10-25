@@ -17,6 +17,7 @@ class Node:
         _background_colour - The default colour this node should be
         _length - the side length of each node in PIXELS
         _coords - The coordinates of this node in the grid
+        _in_control - True iff node is part of block that is in player control
     """
     colour: Tuple[int, int, int]
 
@@ -24,6 +25,7 @@ class Node:
     _background_colour: str
     _length: int
     _coords: Tuple[int, int]
+    _in_control: bool
 
     def __init__(self, colour: Tuple[int, int, int], pos: Tuple[int, int], 
                 side_length: int, coords: Tuple[int, int]):
@@ -37,6 +39,7 @@ class Node:
         self._position = pos
         self._length = side_length
         self._coords = coords
+        self._in_control = False
 
     def get_position(self) -> Tuple[int, int]:
         """ Return the position of the node
@@ -60,6 +63,11 @@ class Node:
         """
         return self._length
 
+    def get_in_control(self) -> bool:
+        """ Return if this node is in control
+        """
+        return self._in_control
+
     def set_colour(self, new_colour: str) -> None:
         """ Set the colour of this node to <new_colour>
         """
@@ -69,6 +77,11 @@ class Node:
         """ Reset the node to the background colour
         """
         self.colour = self._background_colour
+
+    def set_control(self, status) -> None:
+        """ Change the status of the node if it is in control
+        """
+        self._in_control = status
 
     def __str__(self):
         """ String representation of a node object

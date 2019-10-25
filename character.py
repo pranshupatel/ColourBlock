@@ -153,7 +153,7 @@ class Character:
         elif block_type == 6:
             self._block = zblock.ZBlock(self._grid)
         
-        print("block = ", self._block)
+        self.set_block_control(True)
                 
     def play_move(self, move=0, speed_down=False, rotate=False) -> None:
         """ Play one move in the game
@@ -192,27 +192,53 @@ class Character:
         lowest_y = 0
         # store ref to grid's background colour for later
         colour = self._grid.get_colour()
+        grid_nodes = self._grid.get_nodes()
+
+        print("---------")
+
         for node in self._block._nodes:
             # get pos from the node
             # NOTE: pos is in pixel coordinates
             pos = node.get_coords()
             x = pos[0]
             y = pos[1]
-            grid_nodes = self._grid.get_nodes()
 
-            print(y)
+            print(pos)
 
             # NOTE: int div to round down
             if y >= 23:
                 # bottom of grid, do not go down
                 # stop control of block
+                self.set_block_control(False)
                 self._block = None
-
-                print(self._block)
                 return
             # Add way to check nodes below it
+            # without checking the block itself
+            
+            below = grid_nodes[x][y+1]
+            if (not below.get_in_control()) and \
+                below.get_colour() != colour:
+                # node below is not this block
+                # and occupies
+                print(below.get_in_control())
+                print(below.get_coords(), " is occupied")
+                print(below.get_colour())
+                self.set_block_control(False)
+                self._block = None
+                return
 
-        self._block.traverse_down_1row()
+        if self._block:
+            self._block.traverse_down_1row()
+
+    def set_block_control(self, status) -> None:
+        """ Set the status of each node of the curr
+            block to <status>
+        """
+        if not self._block:
+            return
+
+        for i in range(len(self._block._nodes)):
+            self._block._nodes[i].set_control(status)
 
 if __name__ == "__main__":
     player = Character("player 1", 500)
