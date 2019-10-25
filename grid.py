@@ -83,18 +83,18 @@ class Grid:
 		# correct place
         pos_x = self._left_offset - real_length
         pos_y = -real_length * 5
-        for x in range(24):
+        for y in range(24):
             self._nodes.append([])
             pos_y += real_length
-            for y in range(10):
+            for x in range(10):
                 # create a node
 
                 # move into current positon
                 pos_x += real_length
 
                 pos = (pos_x, pos_y)
-                node = Node(self._colour, pos, length)
-                self._nodes[x].append(node)
+                node = Node(self._colour, pos, length, (x, y))
+                self._nodes[y].append(node)
 			# reset x to left
             pos_x = self._left_offset - real_length
 

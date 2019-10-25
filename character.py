@@ -195,13 +195,15 @@ class Character:
         for node in self._block._nodes:
             # get pos from the node
             # NOTE: pos is in pixel coordinates
-            pos = node.get_position()
+            pos = node.get_coords()
             x = pos[0]
             y = pos[1]
             grid_nodes = self._grid.get_nodes()
-        
+
+            print(y)
+
             # NOTE: int div to round down
-            if y >= HEIGHT // 20 * 19:
+            if y >= 23:
                 # bottom of grid, do not go down
                 # stop control of block
                 self._block = None
