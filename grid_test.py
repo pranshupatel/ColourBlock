@@ -57,5 +57,39 @@ class test_basics(test_grid):
         self.assertEqual(expected, actual)
 
 
+class test_methods(test_grid):
+
+    def test_linefull1(self):
+        # test with all blocks filled
+        self.g._nodes[24].append(self.n1)
+        self.g._nodes[24].append(self.n1)
+        self.g._nodes[24].append(self.n1)
+        self.g._nodes[24].append(self.n1)
+        self.g._nodes[24].append(self.n1)
+        self.g._nodes[24].append(self.n1)
+        self.g._nodes[24].append(self.n1)
+        self.g._nodes[24].append(self.n1)
+        self.g._nodes[24].append(self.n1)
+        self.g._nodes[24].append(self.n1)
+        expected = True
+        actual = self.g.is_line_full(24)
+        self.assertEqual(expected, actual)
+
+    def test_linefull2(self):
+        # test with 1 block filled
+        self.g._nodes[23].append(self.n1)
+        expected = False
+        actual = self.g.is_line_full(23)
+        self.assertEqual(expected, actual)
+
+    def test_linefull3(self):
+        # test with n3 (same colour as the background)
+        self.g._nodes[22].append(self.n1)
+        self.g._nodes[22].append(self.n3)
+        self.g._nodes[22].append(self.n2)
+        expected = False
+        actual = self.g.is_line_full(22)
+        self.assertEqual(expected, actual)
+
 if __name__ == "__main__":
     unittest.main(exit=False)
