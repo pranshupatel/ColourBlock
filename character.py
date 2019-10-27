@@ -210,21 +210,26 @@ class Character:
                 # bottom of grid, do not go down
                 # stop control of block
                 self.set_block_control(False)
+                self.set_block_filled(True)
                 self._block = None
+                self.create_block()
                 return
             # Add way to check nodes below it
             # without checking the block itself
             
-            below = grid_nodes[x][y+1]
+            below = grid_nodes[y+1][x]
             if (not below.get_in_control()) and \
-                below.get_colour() != colour:
+                below.get_colour() != colour and \
+                below.get_filled():
                 # node below is not this block
                 # and occupies
                 print(below.get_in_control())
                 print(below.get_coords(), " is occupied")
                 print(below.get_colour())
                 self.set_block_control(False)
+                self.set_block_filled(True)
                 self._block = None
+                self.create_block()                
                 return
 
         if self._block:
@@ -239,6 +244,16 @@ class Character:
 
         for i in range(len(self._block._nodes)):
             self._block._nodes[i].set_control(status)
+
+    def set_block_filled(self, status) -> None:
+        """ Set the filled status of each node of
+            the curr block to <status>
+        """
+        if not self._block:
+            return
+
+        for i in range(len(self._block._nodes)):
+            self._block._nodes[i].set_filled(status)
 
 if __name__ == "__main__":
     player = Character("player 1", 500)
