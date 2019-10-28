@@ -27,7 +27,7 @@ HEIGHT = 600 # 768 #
 FONT = 'Consolas'
 
 """ === CLOCK SPEED === """
-TICK_LENGTH = 100
+TICK_LENGTH = 500
 
 """ BACKGROUND COLOUR """
 COLOUR = (0, 32, 64)
@@ -146,7 +146,7 @@ class Character:
         if self._block:
             return
 
-        block_type = rand(3, 3)
+        block_type = rand(0, 6)
         print("block type = ", block_type)
         # begin switch case
         if block_type == 0:
