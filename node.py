@@ -29,7 +29,7 @@ class Node:
     _in_control: bool
     _filled: bool
 
-    def __init__(self, colour: Tuple[int, int, int], pos: Tuple[int, int], 
+    def __init__(self, colour: Tuple[int, int, int], pos: Tuple[int, int],
                 side_length: int, coords: Tuple[int, int]):
         """ Initialize a new node at a given position and colour.
             Background is also set here
@@ -70,13 +70,13 @@ class Node:
         """ Return if this node is in control
         """
         return self._in_control
-    
+
     def get_filled(self) -> bool:
         """ Return if this node is already filled
         """
-        return self._filled    
+        return self._filled
 
-    def set_colour(self, new_colour: str) -> None:
+    def set_colour(self, new_colour: Tuple[int, int, int]) -> None:
         """ Set the colour of this node to <new_colour>
         """
         self.colour = new_colour
@@ -90,7 +90,7 @@ class Node:
         """ Change the status of the node if it is in control
         """
         self._in_control = status
-    
+
     def set_filled(self, new_filled: bool) -> None:
         """ Set the filled status of this node
         """
