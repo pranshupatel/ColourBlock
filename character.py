@@ -27,7 +27,7 @@ HEIGHT = 600 # 768 #
 FONT = 'Consolas'
 
 """ === CLOCK SPEED === """
-TICK_LENGTH = 500
+TICK_LENGTH = 100
 
 """ BACKGROUND COLOUR """
 COLOUR = (0, 32, 64)
@@ -146,7 +146,7 @@ class Character:
         if self._block:
             return
 
-        block_type = rand(0, 6)
+        block_type = rand(3, 3)
         print("block type = ", block_type)
         # begin switch case
         if block_type == 0:
@@ -194,7 +194,13 @@ class Character:
     def block_fall(self):
         """ Move the current block down by 1 row
             If it can, otherwise make new block
+
+            Afterwards check if lines are full
         """
+
+        # Check if any lines are filled
+        self.clear_lines()
+
         # do nothing if there is no block
         if not self._block:
             return
@@ -245,6 +251,15 @@ class Character:
 
         if self._block:
             self._block.traverse_down_1row()
+
+    def clear_lines(self) -> None:
+        """ check if anylines are full on the grid
+            grid will clear them for us and update the score
+
+            Then we update the score in this class
+        """
+        self._grid.clear_lines()
+        self.update_score()
 
     def set_block_control(self, status) -> None:
         """ Set the status of each node of the curr
