@@ -125,17 +125,17 @@ class Character:
 
         self._score = self._grid.get_score()
 
-    # def move_block_left(self):
-    #     """ Move the current block to the left by 1 unit."""
-    #     self._block.move_left()
+    def move_block_left(self):
+        """ Move the current block to the left by 1 unit."""
+        self._block.move_left()
 
-    # def move_block_right(self):
-    #     """ Move the current block to the right by 1 unit."""
-    #     self._block.move_right()
+    def move_block_right(self):
+        """ Move the current block to the right by 1 unit."""
+        self._block.move_right()
 
-    # def rotate_block(self):
-    #     """ Rotate the current block 90 degrees clockwise."""
-    #     self.rotate()
+    def rotate_block(self):
+        """ Rotate the current block 90 degrees clockwise."""
+        self.rotate()
 
     def create_block(self) -> None:
         """ Spawn in a random block in the
