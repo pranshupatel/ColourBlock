@@ -46,9 +46,8 @@ class Character:
         _score - The current score of the character.
         _history - A list containing all the scores that the character achieved in all previoius games played.
         _block - The current block that the character is in control of.
-		
-		_grid - The grid that the current game is using
-		_vis - The visuals for the game
+        _grid - The grid that the current game is using
+        _vis - The visuals for the game
      """
     _name: str
     _time: int
@@ -73,7 +72,8 @@ class Character:
 
     def setup_grid(self):
         """ Create an instance of grid for this player to use """
-        # to centre, take centre of screen then subtract the grid's width (which is HEIGHT // 2)
+        # to centre, take centre of screen then subtract
+        # the grid's width (which is HEIGHT // 2)
         left_offset = (WIDTH - (HEIGHT // 2)) // 2
         self._grid = Grid(WIDTH, HEIGHT, PADDING, COLOUR, left_offset)
 
@@ -103,16 +103,27 @@ class Character:
         return self._grid
 
     def update_history(self):
-        """ Update the history of this character after the current game is complete."""
+        """ Update the history of this character after the
+        current game is complete."""
 
         # CURRENTLY ABSTRACT
         if self.get_grid.isGameOver():
             self._history.append(self._score)
-			
-    def update_score(self):
-        """ Update the current score accordingly once the grid detects a line is full. """
-        # NEEDS TO BE IMPLEMENTED
-        pass
+
+    def record_history(self, path: str) -> None:
+        """ Record the character's score history in a text file to
+        the designated path."""
+
+        scores_file = open(path, "w+")
+        scores_file.write(self.get_name() + "'s Score History: \n")
+        for score in self._history:
+            scores_file.write(str(score) + "\n")
+
+    def update_score(self) -> None:
+        """ Update the current score of the current character to
+        match the score of the character's grid."""
+
+        self._score = self._grid.get_score()
 
     # def move_block_left(self):
     #     """ Move the current block to the left by 1 unit."""
@@ -127,7 +138,7 @@ class Character:
     #     self.rotate()
 
     def create_block(self) -> None:
-        """ Spawn in a random block in the 
+        """ Spawn in a random block in the
             top rows of the grid
         """
         # DO NOT MAKE A NEW BLOCK
@@ -152,9 +163,9 @@ class Character:
             self._block = z_oppositeBlock.Z_oppositeBlock(self._grid)
         elif block_type == 6:
             self._block = zblock.ZBlock(self._grid)
-        
+
         self.set_block_control(True)
-                
+
     def play_move(self, move=0, speed_down=False, rotate=False) -> None:
         """ Play one move in the game
 
@@ -216,7 +227,7 @@ class Character:
                 return
             # Add way to check nodes below it
             # without checking the block itself
-            
+
             below = grid_nodes[y+1][x]
             if (not below.get_in_control()) and \
                 below.get_colour() != colour and \
@@ -229,7 +240,7 @@ class Character:
                 self.set_block_control(False)
                 self.set_block_filled(True)
                 self._block = None
-                self.create_block()                
+                self.create_block()
                 return
 
         if self._block:
