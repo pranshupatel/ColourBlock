@@ -1,6 +1,7 @@
 """Author: Long Uy Nguyen"""
 
-from typing import Dict, List, Tuple
+from node import Node
+from typing import List, Tuple
 
 
 class Block:
@@ -16,10 +17,15 @@ class Block:
     _in_control = bool
     _name = str
     colour = Tuple[int, int, int]
+    grid = List[List[Node]]
+    node = List[Node]
 
-    def __init__(self, name,  colour):
+    def __init__(self, name: str,  colour: Tuple[int, int, int],
+                 g: List[List[Node]]):
+
         self._name = name
         self.colour = colour
+        self.grid = g
         self._in_control = True
 
     def initialize_nodes(self):
@@ -29,9 +35,18 @@ class Block:
         pass
 
     def is_in_control(self):
+
+        """
+        Return whether the block is still being controlled by the player
+        :return: boolean
+        """
         return self._in_control
 
     def change_in_control(self):
+        """
+        Change the in_control status to False -> the block is not being
+        controlled by the player
+        """
         self._in_control = False
 
     def move_left(self):
@@ -55,21 +70,21 @@ class Block:
         """
         pass
 
-    def move_node_left(self, node):
+    def _move_node_left(self, node):
         """
         Move the block's node left
         :param node: Node
         """
         pass
 
-    def move_node_right(self, node):
+    def _move_node_right(self, node):
         """
         Move the block's node left
         :param node: Node
         """
         pass
 
-    def move_node_down(self, node):
+    def _move_node_down(self, node):
         """
         Move the block's node down 1 row
         :param node: Node
