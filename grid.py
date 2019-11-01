@@ -124,9 +124,24 @@ class Grid:
         """
 		# go through the row, see if any not occupied
         for node in self._nodes[index]:
-            if node.get_colour() == self._colour:
+            if node.get_colour() == self._colour or \
+	        (not node.get_filled()):
                 return False
         # all blocks are different colours
+        return True
+
+    def is_line_clear(self, index: int) -> bool:
+        """ Return true iff line at index is clear
+            i.e. : the colours of each node is the same
+                    as the background colour and the
+                    nodes are not filled
+        """
+	# go through the row, see if any occupied
+        for node in self._nodes[index]:
+            if node.get_colour() != self._colour or \
+	        node.get_filled():
+                return False
+        # all blocks are same colours and not filled
         return True
 
     def is_game_over(self) -> bool:
@@ -134,16 +149,18 @@ class Grid:
             Thus new blocks can not full
         """
         for node in self._nodes[4]:
-            if node.get_colour() != self._colour:
+            if node.get_colour() != self._colour or \
+	        node.get_filled():
                 return True
         return False
 
     def reset_row(self, index: int) -> None:
         """ Make the nodes of row <index> the
-            Background colour again
+            Background colour again and un-fill them
         """
         for i in range(len(self._nodes[index])):
             self._nodes[index][i].reset_colour()
+            self._nodes[index][i].set_filled(False)
 
     def clear_lines(self) -> None:
         """ Clear any lines that are full
@@ -160,4 +177,19 @@ class Grid:
 
         # increase score according to project plan
         self._score += 50 * (2 ** lines_cleared)
+	
+	# fill in newly cleared rows with above nodes
+        y = 23
+        while y > 0:
+            if self.is_line_clear(y):
+                x = 0
+                while x < 10:
+                    self._nodes[y][x].set_colour(self._nodes[y-1][x].get_colour())
+                    self._nodes[y][x].set_control(self._nodes[y-1][x].get_in_control())
+                    self._nodes[y][x].set_filled(self._nodes[y-1][x].get_filled())
+                    self._nodes[y-1][x].reset_colour()
+                    self._nodes[y-1][x].set_control(False)
+                    self._nodes[y-1][x].set_filled(False)
+                    x = x + 1
+            y = y - 1
 
