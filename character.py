@@ -127,11 +127,32 @@ class Character:
 
     def move_block_left(self):
         """ Move the current block to the left by 1 unit."""
-        self._block.move_left()
+        if self._can_move(dir=-1):
+            self._block.move_left()
 
     def move_block_right(self):
         """ Move the current block to the right by 1 unit."""
-        self._block.move_right()
+        if self._can_move(dir=1):
+            self._block.move_right()
+
+    def _can_move(self, dir=0) -> bool:
+        """ return true if the block can move in given direction
+            -1 means left, 1 means right
+            Stops the block from wrapping the grid 
+            ie moving from col 0 to col 9            
+        """
+        if not (dir == 1 or dir == -1):
+            return False
+
+        nodes = self._block._nodes
+
+        # move dict maps -1 to left col, 1 to right
+        move_dict = {-1:0, 1:9}
+
+        for n in nodes:
+            if n.get_coords()[0] == move_dict[dir]:
+                return False
+        return True
 
     def rotate_block(self):
         """ Rotate the current block 90 degrees clockwise."""
@@ -146,7 +167,7 @@ class Character:
         if self._block:
             return
 
-        block_type = rand(0, 6)
+        block_type = rand(0, 0)
         print("block type = ", block_type)
         # begin switch case
         if block_type == 0:
@@ -185,11 +206,11 @@ class Character:
             # add implementation
             pass
         if move == -1:
-            self._block.move_left()
+            self.move_block_left()
         elif move == 0:
             self._block.rotate()
         elif move == 1:
-            self._block.move_right()
+            self.move_block_right()
 
     def block_fall(self):
         """ Move the current block down by 1 row
@@ -211,16 +232,12 @@ class Character:
         colour = self._grid.get_colour()
         grid_nodes = self._grid.get_nodes()
 
-        print("---------")
-
         for node in self._block._nodes:
             # get pos from the node
             # NOTE: pos is in pixel coordinates
             pos = node.get_coords()
             x = pos[0]
             y = pos[1]
-
-            print(pos)
 
             # NOTE: int div to round down
             if y >= 23:
@@ -240,9 +257,6 @@ class Character:
                 below.get_filled():
                 # node below is not this block
                 # and occupies
-                print(below.get_in_control())
-                print(below.get_coords(), " is occupied")
-                print(below.get_colour())
                 self.set_block_control(False)
                 self.set_block_filled(True)
                 self._block = None
