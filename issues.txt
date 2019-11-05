@@ -1,0 +1,6 @@
+List Issues here
+
+1. Block rotation needs to be implemented
+2. Blocks nodes do not always stay coloured when moving left and right
+3. Have block movement left and right be independant of fall timer
+4. 

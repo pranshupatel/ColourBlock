@@ -167,7 +167,7 @@ class Character:
         if self._block:
             return
 
-        block_type = rand(0, 0)
+        block_type = rand(0, 6)
         print("block type = ", block_type)
         # begin switch case
         if block_type == 0:
