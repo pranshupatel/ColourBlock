@@ -42,7 +42,7 @@ DELAY = 50
 FACTOR = 8
 
 """ Author: Pranshu Patel """
-class Character:
+class Player:
 
     """ CHARACTER CLASS
         This class represents a character/player in the game. It keeps track of the score and updates the score as the game is played.
@@ -307,5 +307,5 @@ class Character:
             self._block._nodes[i].set_filled(status)
 
 if __name__ == "__main__":
-    player = Character("player 1", 500)
+    player = Player("player 1", 500)
     
