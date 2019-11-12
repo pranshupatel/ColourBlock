@@ -29,11 +29,14 @@ FONT = 'Consolas'
 """ === CLOCK SPEED === """
 TICK_LENGTH = 500
 
-""" BACKGROUND COLOUR """
+""" === BACKGROUND COLOUR ==="""
 COLOUR = (0, 32, 64)
 
-""" PADDING """
+""" === PADDING === """
 PADDING = 5
+
+""" === Move Delay === """
+DELAY = 50
 
 """ Author: Pranshu Patel """
 class Character:
@@ -65,7 +68,7 @@ class Character:
         self._time = time
         self._score = 0
         self._history = []
-        self._vis = Visuals(WIDTH, HEIGHT, TICK_LENGTH, FONT, self)
+        self._vis = Visuals(WIDTH, HEIGHT, TICK_LENGTH, FONT, self, DELAY)
         self._block = None
         self.setup_grid()
         self.start_game()

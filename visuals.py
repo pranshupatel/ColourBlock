@@ -21,6 +21,7 @@ class Visuals:
         _tick_lenth: the ms between each update
         _font: the font to use in pygame
         _char: the character class this game is using
+        _move_delay: the length of time between each user move
     """
 
     _width: int
@@ -28,8 +29,9 @@ class Visuals:
     _tick_length: int
     _font: str
     _char: None # By Default, will be type character if not None
+    _move_delay: int
 
-    def __init__(self, width: int, height: int, tick: int, font: str, controller=None):
+    def __init__(self, width: int, height: int, tick: int, font: str, controller=None, move_delay=50):
         """ Width, height, tick speed and font for the pygame window
             Controller refers to the character class if one is assinged
             This allows us to update the script of any user input
@@ -42,6 +44,7 @@ class Visuals:
         self._char = None
         if controller:
             self._char = controller
+        self._move_delay = move_delay
 
     def play(self, grid: Grid) -> None:
         """ Set up a pygame window with the passed in grid """
@@ -72,8 +75,9 @@ class Visuals:
             
             # pull from grid
             self.render_grid(screen, grid)
+
+            # go through all events on pygame
             for event in pygame.event.get():
-                # go through all events on pygame
                 if event.type == pygame.QUIT:
                     # user closed the window
                     print("user closed game")
@@ -81,40 +85,36 @@ class Visuals:
                     pygame.quit()
                     exit()
 
-            key = pygame.key.get_pressed()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT:
+                        actions = "left"
+                    elif event.key == pygame.K_RIGHT:
+                        actions = "right"
+                    elif event.key == pygame.K_UP:
+                        actions = "rotate"
+                    elif event.key == pygame.K_DOWN:
+                        actions = "down"
 
-            # User pressed a key
-            #if event.key == pygame.K_LEFT:
-            if key[pygame.K_LEFT]:
-                # user hit left key
-                actions = "left"
-            elif key[pygame.K_RIGHT]:
-                # user pressed right key
-                actions = "right"
-            elif key[pygame.K_UP]:
-                # user pressed up key
-                actions = "rotate"
-            elif key[pygame.K_DOWN]:
-                # user pressed down key
-                actions = "down"
-
-            # Time to update the grid
+            # Drop the block by 1 row
             if pygame.time.get_ticks() % self._tick_length == 0:
 
                 # Move blocks down now that they have moved
                 if self._char:
                     self._char.block_fall()
 
-                    # begin switch case
-                    if actions == "left":
-                        self._char.play_move(-1)
-                    elif actions == "right":
-                        self._char.play_move(1)
-                    elif actions == "rotate":
-                        self._char.play_move(rotate=True)
-                    elif actions == "down":
-                        self._char.play_move(speed_down=True)
-                    actions = "_"
+            # execute player move
+            if pygame.time.get_ticks() % self._move_delay == 0:
+                print(actions)
+                # begin switch case
+                if actions == "left":
+                    self._char.play_move(-1)
+                elif actions == "right":
+                    self._char.play_move(1)
+                elif actions == "rotate":
+                    self._char.play_move(rotate=True)
+                elif actions == "down":
+                    self._char.play_move(speed_down=True)
+                actions = "_"
 
     def render_grid(self, screen: pygame.display, grid: Grid) -> None:
         """ Draw the grid on a pygame window
