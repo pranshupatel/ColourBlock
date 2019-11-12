@@ -150,14 +150,23 @@ class Character:
         if not (dir == 1 or dir == -1):
             return False
 
-        nodes = self._block._nodes
+        block = self._block._nodes
+        grid = self._grid.get_nodes()
 
         # move dict maps -1 to left col, 1 to right
         move_dict = {-1:0, 1:9}
 
-        for n in nodes:
-            if n.get_coords()[0] == move_dict[dir]:
+        # check if hits walls
+        for n in block:
+            pos = n.get_coords()
+            # if x coordinate is 0 or 9, stop moving left / right
+            if pos[0] == move_dict[dir]:
                 return False
+            # if the node to the left or right is occupied, do not move into it
+            # print("pos 0 = ",pos[0], "pos 1 = ", pos[1])
+            if grid[pos[1]][pos[0] + dir].get_filled():
+                return False
+            
         return True
 
     def rotate_block(self):
@@ -299,3 +308,4 @@ class Character:
 
 if __name__ == "__main__":
     player = Character("player 1", 500)
+    

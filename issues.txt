@@ -2,8 +2,6 @@ List Issues Here
 
 1. Block rotation needs to be implemented
 2. Blocks nodes do not always stay coloured when moving left and right (Fix blocks disappearing as they move left or right)
-3. Collision detection on blocks: if the node is filled, don't move the block into the filled node
-5. 
 
 -
 
@@ -13,3 +11,4 @@ Resolved Issues
 2. Collision detection on right side: needs to be implemented so that rightmost nodes of blocks don't disappear off-screen
 3. Collision detection on left side: needs to be implemented so that wrap-around doesn't occur
 4. Have block movement left and right be independent of fall timer (Moving/rotating blocks should work independently of block-falling timer)
+5. Collision detection on blocks: if the node is filled, don't move the block into the filled node
