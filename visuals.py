@@ -76,21 +76,11 @@ class Visuals:
         actions = "_"
 
         while(True):
-            # timer for when to update
-            # pygame.time.delay(self._tick_length)
-            
             # pull from grid
-            self.render_grid(screen, grid)
-
+            self.render_grid(screen, grid)            
             # go through all events on pygame
+            keep_playing = True
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    # user closed the window
-                    print("user closed game")
-                    # stop the game
-                    pygame.quit()
-                    exit()
-
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
                         actions = "left"
@@ -98,6 +88,17 @@ class Visuals:
                         actions = "right"
                     elif event.key == pygame.K_UP:
                         actions = "rotate"
+                    if event.key == pygame.K_ESCAPE:
+                        keep_playing = self.pause_game(screen)
+
+                if event.type == pygame.QUIT or not keep_playing:
+                    # user closed the window
+                    print("user closed game")
+                    # stop the game
+                    pygame.quit()
+                    return
+
+
 
             # check if user wants to increase block fall speed
 
@@ -131,6 +132,9 @@ class Visuals:
     def render_grid(self, screen: pygame.display, grid: Grid) -> None:
         """ Draw the grid on a pygame window
         """
+        # reset the screen to black
+        screen.fill((0,0,0))
+
         nodes = grid.get_nodes()
 
         # NOTE: Render only the bottom 20 
@@ -144,3 +148,43 @@ class Visuals:
 
                 pygame.draw.rect(screen, colour, (pos[0], pos[1], length, length))
         pygame.display.update()
+
+    def pause_game(self, screen: pygame.display) -> bool:
+        """ Pause the game until the user presses the resume key
+            return true if user wants to resume, false if want to quit
+        """
+        print("game paused")
+
+        # open menu
+        surface = pygame.Surface((self._width, self._height))
+        surface.set_alpha(128)
+        surface.fill((84,89,97))
+
+        screen.blit(surface, (0,0))
+
+        # draw the text
+        font = pygame.font.SysFont(self._font, 32)
+
+        pause_text = font.render("paused", True, (255,255,255))
+        text_rect = pause_text.get_rect()
+        text_rect.center = (self._width // 2, self._height // 20)
+        screen.blit(pause_text, text_rect)
+
+        resume_text = font.render("press esc to resume", 32, (255,255,255))
+        text_rect = resume_text.get_rect()
+        text_rect.center = (self._width // 2, self._height // 7.5)
+        screen.blit(resume_text, text_rect)
+        
+        # pygame.draw.rect(screen, (84,89,97, 5), (0,0, self._width, self._height))
+        pygame.display.update()
+
+        # pause the game
+        resume = False
+        while not resume:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    return False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        resume = True
+        return True
