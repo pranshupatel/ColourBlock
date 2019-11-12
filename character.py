@@ -38,6 +38,9 @@ PADDING = 5
 """ === Move Delay === """
 DELAY = 50
 
+""" === Drop Factor === """
+FACTOR = 8
+
 """ Author: Pranshu Patel """
 class Character:
 
@@ -68,7 +71,7 @@ class Character:
         self._time = time
         self._score = 0
         self._history = []
-        self._vis = Visuals(WIDTH, HEIGHT, TICK_LENGTH, FONT, self, DELAY)
+        self._vis = Visuals(WIDTH, HEIGHT, TICK_LENGTH, FONT, self, DELAY, FACTOR)
         self._block = None
         self.setup_grid()
         self.start_game()
@@ -190,7 +193,7 @@ class Character:
 
         self.set_block_control(True)
 
-    def play_move(self, move=0, speed_down=False, rotate=False) -> None:
+    def play_move(self, move=0, rotate=False) -> None:
         """ Play one move in the game
 
             move represents the players move direction
@@ -199,15 +202,11 @@ class Character:
              anything else do nothing
 
             rotate: if true, rotate the block
-            speed down: if true blocks falls at faster rate
         """
         if not self._block:
             print("no block")
             return
 
-        if speed_down:
-            # add implementation
-            pass
         if move == -1:
             self.move_block_left()
         elif move == 0:

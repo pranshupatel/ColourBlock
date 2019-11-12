@@ -22,6 +22,8 @@ class Visuals:
         _font: the font to use in pygame
         _char: the character class this game is using
         _move_delay: the length of time between each user move
+        _quick_drop: whether to drop the block quicker or normal speed
+        _quick_drop_factor: how many times faster should the block fall when pressing down
     """
 
     _width: int
@@ -30,8 +32,10 @@ class Visuals:
     _font: str
     _char: None # By Default, will be type character if not None
     _move_delay: int
+    _quick_drop: True
+    _quick_drop_factor: int
 
-    def __init__(self, width: int, height: int, tick: int, font: str, controller=None, move_delay=50):
+    def __init__(self, width: int, height: int, tick: int, font: str, controller=None, move_delay=50, factor=8):
         """ Width, height, tick speed and font for the pygame window
             Controller refers to the character class if one is assinged
             This allows us to update the script of any user input
@@ -45,6 +49,8 @@ class Visuals:
         if controller:
             self._char = controller
         self._move_delay = move_delay
+        self._quick_drop = False
+        self._quick_drop_factor = factor
 
     def play(self, grid: Grid) -> None:
         """ Set up a pygame window with the passed in grid """
@@ -92,19 +98,20 @@ class Visuals:
                         actions = "right"
                     elif event.key == pygame.K_UP:
                         actions = "rotate"
-                    elif event.key == pygame.K_DOWN:
-                        actions = "down"
 
-            # Drop the block by 1 row
-            if pygame.time.get_ticks() % self._tick_length == 0:
+            # check if user wants to increase block fall speed
 
-                # Move blocks down now that they have moved
-                if self._char:
-                    self._char.block_fall()
+            # tick len * 1 is normal
+            speed_scale = 1
+
+            pressed_keys = pygame.key.get_pressed()
+            self._quick_drop = pressed_keys[pygame.K_DOWN]
+            if self._quick_drop:
+                # 1/2 * tick len means it comes up twice as often
+                speed_scale = 1/8            
 
             # execute player move
             if pygame.time.get_ticks() % self._move_delay == 0:
-                print(actions)
                 # begin switch case
                 if actions == "left":
                     self._char.play_move(-1)
@@ -112,9 +119,14 @@ class Visuals:
                     self._char.play_move(1)
                 elif actions == "rotate":
                     self._char.play_move(rotate=True)
-                elif actions == "down":
-                    self._char.play_move(speed_down=True)
                 actions = "_"
+            
+            # Drop the block by 1 row
+            if pygame.time.get_ticks() % (self._tick_length * speed_scale) == 0:
+
+                # Move blocks down now that they have moved
+                if self._char:
+                    self._char.block_fall()
 
     def render_grid(self, screen: pygame.display, grid: Grid) -> None:
         """ Draw the grid on a pygame window
