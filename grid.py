@@ -38,6 +38,7 @@ class Grid:
         _colour - the default colour of all nodes in the grid
         _left_offset - the distance in PIXELS from the left edge of the game window
         _score - the players score so far
+        _is_over - whether the game is over
     """
 
     _width: int
@@ -47,6 +48,7 @@ class Grid:
     _colour: Tuple[int, int, int]
     _left_offset: int
     _score: int
+    _is_over: bool
 
     def __init__(self, width: int, height: int, padding, colour: Tuple[int, int, int], offset=0):
         """ Create a new grid based on the resolution of the game window
@@ -63,6 +65,7 @@ class Grid:
         self._colour = colour
         self._left_offset = offset
         self._score = 0
+        self._is_over = False
         self.create_grid()
 
     def create_grid(self) -> None:
@@ -144,15 +147,17 @@ class Grid:
         # all blocks are same colours and not filled
         return True
 
-    def is_game_over(self) -> bool:
-        """ Return True iff there is a block at the top row
-            Thus new blocks can not full
+    def set_game_over(self) -> None:
+        """ Set the game to be over, 
+            ONLY TO BE CALLED FROM PLAYER
         """
-        for node in self._nodes[4]:
-            if node.get_colour() != self._colour or \
-	        node.get_filled():
-                return True
-        return False
+        self._is_over = True
+
+    def is_game_over(self) -> bool:
+        """ Return True iff player can not make a new move
+            Checked in the player script, this just return the value
+        """
+        return self._is_over
 
     def reset_row(self, index: int) -> None:
         """ Make the nodes of row <index> the

@@ -101,7 +101,7 @@ class Node:
             -> node at [self.position]
         """
         #return "{}{}".format("node at ", self._position)
-        return str(self._position)
+        return str(self._coords)
 
     def __repr__(self):
         """ how python will represent a node object

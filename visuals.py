@@ -60,6 +60,7 @@ class Visuals:
         pygame.display.set_caption("Colour Block")
 
         self.frame(screen, grid)
+        self.end_game(grid)
 
     def update_tick(self, new_tick:int) -> None:
         """ Update the tick length to the new tick length
@@ -124,6 +125,10 @@ class Visuals:
             
             # Drop the block by 1 row
             if pygame.time.get_ticks() % (self._tick_length * speed_scale) == 0:
+                
+                # if the game is over do nothing
+                if grid.is_game_over():
+                    return
 
                 # Move blocks down now that they have moved
                 if self._player:
@@ -179,12 +184,20 @@ class Visuals:
         pygame.display.update()
 
         # pause the game
-        resume = False
-        while not resume:
+        while True:
             for event in pygame.event.get():
+                # player wants to quit
                 if event.type == pygame.QUIT:
                     return False
+                # player wants to resume
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
-                        resume = True
-        return True
+                        return True
+    
+    def end_game(self, grid: Grid) -> None:
+        """ Run when the game is over
+            Display the score
+        """
+        print("game is over")
+        print("final score = ", grid.get_score())
+        pygame.quit()

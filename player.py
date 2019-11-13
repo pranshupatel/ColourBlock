@@ -183,7 +183,6 @@ class Player:
             return
 
         block_type = rand(0, 6)
-        print("block type = ", block_type)
         # begin switch case
         if block_type == 0:
             self._block = iblock.IBlock(self._grid)
@@ -201,6 +200,7 @@ class Player:
             self._block = zblock.ZBlock(self._grid)
 
         self.set_block_control(True)
+        print("block: ", self._block._name)
 
     def play_move(self, move=0, rotate=False) -> None:
         """ Play one move in the game
@@ -233,6 +233,9 @@ class Player:
         # Check if any lines are filled
         self.clear_lines()
 
+        self.set_block_control(True)
+        self.set_block_filled(True)
+
         # do nothing if there is no block
         if not self._block:
             return
@@ -259,22 +262,36 @@ class Player:
                 self._block = None
                 self.create_block()
                 return
-            # Add way to check nodes below it
-            # without checking the block itself
-
+            
+            # check the nodes below if block can fall
             below = grid_nodes[y+1][x]
             if (not below.get_in_control()) and \
-                below.get_colour() != colour and \
-                below.get_filled():
+                below.get_colour() != colour:
                 # node below is not this block
-                # and occupies
+                # and occupied
+
+                # node.colour = (0,0,0)
+                # below.colour = (255,255,255)
+
                 self.set_block_control(False)
                 self.set_block_filled(True)
                 self._block = None
+
+                # CHECK IF GAME IS OVER
+                # if a block that high collides, game is over
+                if y <= 4:
+
+                    print(pos)
+                    print(below.get_coords())
+                    print(below.get_colour())
+                    self._grid.set_game_over()
+
                 self.create_block()
                 return
 
         if self._block:
+            self.set_block_control(False)
+            self.set_block_filled(False)
             self._block.traverse_down_1row()
 
     def clear_lines(self) -> None:
