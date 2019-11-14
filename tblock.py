@@ -135,7 +135,7 @@ class TBlock(Block):
 
     def rotate(self):
         """
-        Rotate the block 90 degree clockwise
+        Rotate the TBlock 90 degree clockwise
         """
         curr_node1 = self._nodes[1].get_coords()
         curr_node2 = self._nodes[2].get_coords()
@@ -158,13 +158,13 @@ class TBlock(Block):
                     self.grid[curr_node1[1]][curr_node1[0]].set_control(False)
                     self._snapshots = 2
             except IndexError:
-                pass
+                return
         elif self._snapshots == 2:
             try:
                 row = curr_node3[1]
                 col = curr_node3[0]
                 if self.grid[row-1][col-1].get_colour()\
-                        == self._default_colour:
+                        == self._default_colour and col > 0 and row > 0:
                     self.grid[curr_node1[1]][curr_node1[0]].reset_colour()
                     self._nodes[1] = self.grid[curr_node2[1]][curr_node2[0]]
                     self._nodes[2] = self.grid[curr_node3[1]][curr_node3[0]]
@@ -177,13 +177,13 @@ class TBlock(Block):
                     self.grid[curr_node1[1]][curr_node1[0]].set_control(False)
                     self._snapshots = 3
             except IndexError:
-                pass
+                return
         elif self._snapshots == 3:
             try:
                 row = curr_node3[1]
                 col = curr_node3[0]
                 if self.grid[row - 1][col + 1].get_colour() \
-                        == self._default_colour:
+                        == self._default_colour and row > 0:
                     self.grid[curr_node1[1]][curr_node1[0]].reset_colour()
                     self._nodes[1] = self.grid[curr_node2[1]][curr_node2[0]]
                     self._nodes[2] = self.grid[curr_node3[1]][curr_node3[0]]
@@ -196,7 +196,7 @@ class TBlock(Block):
                     self.grid[curr_node1[1]][curr_node1[0]].set_control(False)
                     self._snapshots = 4
             except IndexError:
-                pass
+                return
         elif self._snapshots == 4:
             try:
                 row = curr_node3[1]
@@ -215,4 +215,4 @@ class TBlock(Block):
                     self.grid[curr_node1[1]][curr_node1[0]].set_control(False)
                     self._snapshots = 1
             except IndexError:
-                pass
+                return
