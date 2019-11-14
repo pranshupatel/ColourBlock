@@ -2,7 +2,7 @@
 This is our CSC290 Project.
 
 We are using 'python' and 'pygame'
-Created by Ajitesh Misra, Pranshu Patel, Harvin Lachhar
+Created by Ajitesh Misra, Pranshu Patel, Harvin Lachhar, Long Uy Nguyen
 
 ## navigation
 <a name="top"></a>
