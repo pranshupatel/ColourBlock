@@ -144,8 +144,8 @@ class Player:
     def _can_move(self, dir=0) -> bool:
         """ return true if the block can move in given direction
             -1 means left, 1 means right
-            Stops the block from wrapping the grid 
-            ie moving from col 0 to col 9            
+            Stops the block from wrapping the grid
+            ie moving from col 0 to col 9
         """
         if not (dir == 1 or dir == -1):
             return False
@@ -166,7 +166,7 @@ class Player:
             # print("pos 0 = ",pos[0], "pos 1 = ", pos[1])
             if grid[pos[1]][pos[0] + dir].get_filled():
                 return False
-            
+
         return True
 
     def rotate_block(self):
@@ -262,7 +262,7 @@ class Player:
                 self._block = None
                 self.create_block()
                 return
-            
+
             # check the nodes below if block can fall
             below = grid_nodes[y+1][x]
             if (not below.get_in_control()) and \
@@ -279,7 +279,7 @@ class Player:
 
                 # CHECK IF GAME IS OVER
                 # if a block that high collides, game is over
-                if y <= 4:
+                if y <= 2:
 
                     print(pos)
                     print(below.get_coords())
@@ -325,4 +325,4 @@ class Player:
 
 if __name__ == "__main__":
     player = Player("player 1", 500)
-    
+

@@ -61,6 +61,9 @@ class Node:
         """
         return self.colour
 
+    def get_background_colour(self) -> Tuple[int, int, int]:
+        return self._background_colour
+
     def get_length(self) -> int:
         """ Return the length of the node
         """

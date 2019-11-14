@@ -13,12 +13,13 @@ class Block:
     _blocks represents the Tuple (nodes) that the block is consisted of
     _in_control is a bool representing whether the user is in control of this
     block
+    Center of rotation will always be the first node in _nodes
+    Only exception is the I block
     """
     _in_control = bool
     _name = str
     colour = Tuple[int, int, int]
     grid = List[List[Node]]
-    node = List[Node]
 
     def __init__(self, name: str,  colour: Tuple[int, int, int],
                  g: List[List[Node]]):
@@ -61,9 +62,6 @@ class Block:
         """
         pass
 
-    def rotate(self):
-        pass
-
     def traverse_down_1row(self):
         """
         Move the block down 1 row
@@ -89,4 +87,7 @@ class Block:
         Move the block's node down 1 row
         :param node: Node
         """
+        pass
+
+    def rotate(self):
         pass
