@@ -38,7 +38,7 @@ class Z_oppositeBlock(Block):
 
     def move_left(self):
         """
-        Move this TBlock to the left
+        Move this Z-OppositeBlock to the left
         """
         l_coords = []
         for node in self._nodes:
@@ -68,7 +68,7 @@ class Z_oppositeBlock(Block):
 
     def _move_node_right(self, coord):
         """
-        Move the node of this TBlock to the right
+        Move the node of this Z-OppositeBlock to the right
         :param node: Node
         """
         row = coord[1]
@@ -84,7 +84,7 @@ class Z_oppositeBlock(Block):
 
     def move_right(self):
         """
-        Move this TBlock to the right
+        Move this Z-OppositeBlock to the right
         """
         l_coords = []
         for node in self._nodes:
@@ -101,7 +101,7 @@ class Z_oppositeBlock(Block):
 
     def _move_node_down(self, coord):
         """
-        Move the TBlock's node down 1 row
+        Move the Z-OppositeBlock's node down 1 row
         :param node: Node
         """
         row = coord[1]
@@ -118,7 +118,7 @@ class Z_oppositeBlock(Block):
 
     def traverse_down_1row(self):
         """
-        Move the TBlock down 1 row
+        Move the Z-OppositeBlock down 1 row
         """
         l_coords = []
         for node in self._nodes:
@@ -135,69 +135,99 @@ class Z_oppositeBlock(Block):
 
     def rotate(self):
         """
-        requires implementation
-        Rotate the block 90 degree clockwise
+        Rotate the Z-OppositeBlock 90 degree clockwise
         """
-        curr_node3 = self._nodes[3].get_coords()
         curr_node1 = self._nodes[1].get_coords()
         curr_node2 = self._nodes[2].get_coords()
+        curr_node3 = self._nodes[3].get_coords()
         if self._snapshots == 1:
             try:
-                if self.grid[curr_node3[0] + 1][curr_node3[1] - 1].get_colour() \
-                        == self._default_colour:
-                    self._nodes[1] = self.grid[curr_node2[0]][curr_node2[1]]
-                    self._nodes[2] = self.grid[curr_node3[0]][curr_node3[1]]
-                    self._nodes[3] = self.grid[curr_node3[0] + 1][
-                        curr_node3[1] - 1]
-                    self._nodes[3].set_colour(self.colour)
-                    self.grid[curr_node1[0]][curr_node1[1]].reset_colour()
-                    self._nodes[3].set_control(True)
-                    self.grid[curr_node1[0]][curr_node1[1]].set_control(False)
+                row = curr_node3[1]
+                col = curr_node3[0]
+                if self.grid[row + 2][col].get_colour() == self._default_colour\
+                        and self.grid[row + 1][col].get_colour() == self._default_colour:
+
+                    self._nodes[1] = self.grid[curr_node2[1]][curr_node2[0]]
+                    self._nodes[2] = self.grid[row + 1][col]
+                    self._nodes[3] = self.grid[row + 2][col]
+
+                    for i in range(len(self._nodes)):
+                        self._nodes[i].set_colour(self.colour)
+                        self._nodes[i].set_control(True)
+
+                    self.grid[curr_node1[1]][curr_node1[0]].reset_colour()
+                    self.grid[curr_node3[1]][curr_node3[0]].reset_colour()
+                    self.grid[curr_node1[1]][curr_node1[0]].set_control(False)
+                    self.grid[curr_node3[1]][curr_node3[0]].set_control(False)
                     self._snapshots = 2
             except IndexError:
-                pass
+                return
         elif self._snapshots == 2:
             try:
-                if self.grid[curr_node3[0] - 1][curr_node3[1] - 1].get_colour() \
-                        == self._default_colour:
-                    self._nodes[1] = self.grid[curr_node2[0]][curr_node2[1]]
-                    self._nodes[2] = self.grid[curr_node3[0]][curr_node3[1]]
-                    self._nodes[3] = self.grid[curr_node3[0] - 1][
-                        curr_node3[1] - 1]
-                    self._nodes[3].set_colour(self.colour)
-                    self.grid[curr_node1[0]][curr_node1[1]].reset_colour()
-                    self._nodes[3].set_control(True)
-                    self.grid[curr_node1[0]][curr_node1[1]].set_control(False)
+                row = curr_node3[1]
+                col = curr_node3[0]
+                if col > 0 and self.grid[row][col-2].get_colour() == self._default_colour\
+                        and self.grid[row][col-1].get_colour() == self._default_colour:
+
+                    self._nodes[1] = self.grid[curr_node2[1]][curr_node2[0]]
+                    self._nodes[2] = self.grid[row][col-1]
+                    self._nodes[3] = self.grid[row][col-2]
+
+                    for i in range(len(self._nodes)):
+                        self._nodes[i].set_colour(self.colour)
+                        self._nodes[i].set_control(True)
+
+                    self.grid[curr_node1[1]][curr_node1[0]].reset_colour()
+                    self.grid[curr_node3[1]][curr_node3[0]].reset_colour()
+
+                    self.grid[curr_node1[1]][curr_node1[0]].set_control(False)
+                    self.grid[curr_node3[1]][curr_node3[0]].set_control(False)
                     self._snapshots = 3
             except IndexError:
-                pass
+                return
         elif self._snapshots == 3:
             try:
-                if self.grid[curr_node3[0] - 1][curr_node3[1] + 1].get_colour() \
-                        == self._default_colour:
-                    self._nodes[1] = self.grid[curr_node2[0]][curr_node2[1]]
-                    self._nodes[2] = self.grid[curr_node3[0]][curr_node3[1]]
-                    self._nodes[3] = self.grid[curr_node3[0] - 1][
-                        curr_node3[1] + 1]
-                    self._nodes[3].set_colour(self.colour)
-                    self.grid[curr_node1[0]][curr_node1[1]].reset_colour()
-                    self._nodes[3].set_control(True)
-                    self.grid[curr_node1[0]][curr_node1[1]].set_control(False)
+                row = curr_node3[1]
+                col = curr_node3[0]
+                if self.grid[row-2][col].get_colour() == self._default_colour \
+                        and self.grid[row-1][col].get_colour() == self._default_colour:
+
+                    self._nodes[1] = self.grid[curr_node2[1]][curr_node2[0]]
+                    self._nodes[2] = self.grid[row-1][col]
+                    self._nodes[3] = self.grid[row-2][col]
+
+                    for i in range(len(self._nodes)):
+                        self._nodes[i].set_colour(self.colour)
+                        self._nodes[i].set_control(True)
+
+                    self.grid[curr_node1[1]][curr_node1[0]].reset_colour()
+                    self.grid[curr_node3[1]][curr_node3[0]].reset_colour()
+
+                    self.grid[curr_node1[1]][curr_node1[0]].set_control(False)
+                    self.grid[curr_node3[1]][curr_node3[0]].set_control(False)
                     self._snapshots = 4
             except IndexError:
-                pass
+                return
         elif self._snapshots == 4:
             try:
-                if self.grid[curr_node3[0] + 1][curr_node3[1] + 1].get_colour() \
-                        == self._default_colour:
-                    self._nodes[1] = self.grid[curr_node2[0]][curr_node2[1]]
-                    self._nodes[2] = self.grid[curr_node3[0]][curr_node3[1]]
-                    self._nodes[3] = self.grid[curr_node3[0] + 1][
-                        curr_node3[1] + 1]
-                    self._nodes[3].set_colour(self.colour)
-                    self.grid[curr_node1[0]][curr_node1[1]].reset_colour()
-                    self._nodes[3].set_control(True)
-                    self.grid[curr_node1[0]][curr_node1[1]].set_control(False)
+                row = curr_node3[1]
+                col = curr_node3[0]
+                if self.grid[row][col + 2].get_colour() == self._default_colour \
+                        and self.grid[row][col + 1].get_colour() == self._default_colour:
+
+                    self._nodes[1] = self.grid[curr_node2[1]][curr_node2[0]]
+                    self._nodes[2] = self.grid[row][col + 1]
+                    self._nodes[3] = self.grid[row][col + 2]
+
+                    for i in range(len(self._nodes)):
+                        self._nodes[i].set_colour(self.colour)
+                        self._nodes[i].set_control(True)
+
+                    self.grid[curr_node1[1]][curr_node1[0]].reset_colour()
+                    self.grid[curr_node3[1]][curr_node3[0]].reset_colour()
+
+                    self.grid[curr_node1[1]][curr_node1[0]].set_control(False)
+                    self.grid[curr_node3[1]][curr_node3[0]].set_control(False)
                     self._snapshots = 1
             except IndexError:
-                pass
+                return

@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e32e622-06e2-4dd5-bb74-fc31325dfead" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ColourBlock.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ColourBlock.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/block.py" beforeDir="false" afterPath="$PROJECT_DIR$/block.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iblock.py" beforeDir="false" afterPath="$PROJECT_DIR$/iblock.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/l_oppositeblock.py" beforeDir="false" afterPath="$PROJECT_DIR$/l_oppositeblock.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lblock.py" beforeDir="false" afterPath="$PROJECT_DIR$/lblock.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node.py" beforeDir="false" afterPath="$PROJECT_DIR$/node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/squareblock.py" beforeDir="false" afterPath="$PROJECT_DIR$/squareblock.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tblock.py" beforeDir="false" afterPath="$PROJECT_DIR$/tblock.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/z_oppositeBlock.py" beforeDir="false" afterPath="$PROJECT_DIR$/z_oppositeBlock.py" afterDir="false" />
@@ -33,24 +28,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="18" />
+          <entry key="py" value="19" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="18" />
+          <entry key="Python" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3082" />
+          <entry key="py" value="4995" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="3082" />
+          <entry key="Python" value="4995" />
         </counts>
       </usages-collector>
     </session>
@@ -60,8 +55,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/player.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+            <state relative-caret-position="182">
+              <caret line="189" column="25" selection-start-line="189" selection-start-column="25" selection-end-line="189" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -72,7 +67,7 @@
             <state relative-caret-position="1026">
               <caret line="54" column="23" lean-forward="true" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
               <folding>
-                <marker date="1573714222507" expanded="true" signature="1985:1991" ph="..." />
+                <marker date="1573758182148" expanded="true" signature="1985:1991" ph="..." />
               </folding>
             </state>
           </provider>
@@ -81,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/block.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
+            <state relative-caret-position="-950">
               <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
             </state>
           </provider>
@@ -90,21 +85,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tblock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="121" column="11" lean-forward="true" selection-start-line="121" selection-start-column="11" selection-end-line="121" selection-end-column="11" />
+            <state relative-caret-position="418">
+              <caret line="166" column="71" selection-start-line="166" selection-start-column="71" selection-end-line="166" selection-end-column="71" />
               <folding>
-                <marker date="1573756650787" expanded="true" signature="1034:1043" ph="..." />
-                <marker date="1573756650787" expanded="true" signature="1885:1894" ph="..." />
+                <marker date="1573762844343" expanded="true" signature="1034:1043" ph="..." />
+                <marker date="1573762844343" expanded="true" signature="1885:1894" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/squareblock.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="99" selection-start-line="99" selection-end-line="99" />
             </state>
           </provider>
         </entry>
@@ -112,8 +98,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/z_oppositeBlock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1094">
-              <caret line="133" column="37" lean-forward="true" selection-start-line="38" selection-start-column="4" selection-end-line="133" selection-end-column="37" />
+            <state relative-caret-position="714">
+              <caret line="229" column="67" lean-forward="true" selection-start-line="229" selection-start-column="67" selection-end-line="229" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -121,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/zblock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2527">
-              <caret line="133" column="37" selection-start-line="133" selection-start-column="37" selection-end-line="133" selection-end-column="37" />
+            <state relative-caret-position="399">
+              <caret line="216" column="57" selection-start-line="216" selection-start-column="57" selection-end-line="216" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -130,8 +116,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iblock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2565">
-              <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
+            <state relative-caret-position="-312">
+              <caret line="145" column="48" lean-forward="true" selection-start-line="143" selection-start-column="8" selection-end-line="145" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -139,8 +125,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/l_oppositeblock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="134" column="37" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
+            <state relative-caret-position="1854">
+              <caret line="241" column="39" selection-start-line="241" selection-start-column="39" selection-end-line="241" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -148,8 +134,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lblock.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="134" column="37" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
+            <state relative-caret-position="190">
+              <caret line="150" column="53" selection-start-line="150" selection-start-column="53" selection-end-line="150" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -168,6 +154,7 @@
       <find>drop</find>
       <find>row</find>
       <find>self.create_block</find>
+      <find>TBlock</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,18 +165,18 @@
       <list>
         <option value="$PROJECT_DIR$/node.py" />
         <option value="$PROJECT_DIR$/player.py" />
-        <option value="$PROJECT_DIR$/tblock.py" />
         <option value="$PROJECT_DIR$/block.py" />
-        <option value="$PROJECT_DIR$/z_oppositeBlock.py" />
-        <option value="$PROJECT_DIR$/zblock.py" />
         <option value="$PROJECT_DIR$/squareblock.py" />
+        <option value="$PROJECT_DIR$/tblock.py" />
+        <option value="$PROJECT_DIR$/zblock.py" />
+        <option value="$PROJECT_DIR$/z_oppositeBlock.py" />
         <option value="$PROJECT_DIR$/iblock.py" />
         <option value="$PROJECT_DIR$/l_oppositeblock.py" />
         <option value="$PROJECT_DIR$/lblock.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="600" />
     <option name="y" value="-25" />
     <option name="width" value="980" />
@@ -392,7 +379,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Version Control" order="5" />
-      <window_info active="true" anchor="bottom" x="-1500" y="276" width="1210" height="293" id="Run" order="6" type="FLOATING" visible="true" weight="0.51914895" />
+      <window_info anchor="bottom" x="-1461" y="44" width="1210" height="293" id="Run" order="6" type="FLOATING" weight="0.51914895" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -440,75 +427,75 @@
         <state relative-caret-position="1026">
           <caret line="54" column="23" lean-forward="true" selection-start-line="54" selection-start-column="23" selection-end-line="54" selection-end-column="23" />
           <folding>
-            <marker date="1573714222507" expanded="true" signature="1985:1991" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/block.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tblock.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="121" column="11" lean-forward="true" selection-start-line="121" selection-start-column="11" selection-end-line="121" selection-end-column="11" />
-          <folding>
-            <marker date="1573756650787" expanded="true" signature="1034:1043" ph="..." />
-            <marker date="1573756650787" expanded="true" signature="1885:1894" ph="..." />
+            <marker date="1573758182148" expanded="true" signature="1985:1991" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/squareblock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="99" selection-start-line="99" selection-end-line="99" />
+        <state relative-caret-position="133">
+          <caret line="118" column="23" selection-start-line="118" selection-start-column="23" selection-end-line="118" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/block.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-950">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tblock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="166" column="71" selection-start-line="166" selection-start-column="71" selection-end-line="166" selection-end-column="71" />
+          <folding>
+            <marker date="1573762844343" expanded="true" signature="1034:1043" ph="..." />
+            <marker date="1573762844343" expanded="true" signature="1885:1894" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/z_oppositeBlock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1094">
-          <caret line="133" column="37" lean-forward="true" selection-start-line="38" selection-start-column="4" selection-end-line="133" selection-end-column="37" />
+        <state relative-caret-position="714">
+          <caret line="229" column="67" lean-forward="true" selection-start-line="229" selection-start-column="67" selection-end-line="229" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/zblock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2527">
-          <caret line="133" column="37" selection-start-line="133" selection-start-column="37" selection-end-line="133" selection-end-column="37" />
+        <state relative-caret-position="399">
+          <caret line="216" column="57" selection-start-line="216" selection-start-column="57" selection-end-line="216" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iblock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2565">
-          <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
+        <state relative-caret-position="-312">
+          <caret line="145" column="48" lean-forward="true" selection-start-line="143" selection-start-column="8" selection-end-line="145" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/l_oppositeblock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="134" column="37" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
+        <state relative-caret-position="1854">
+          <caret line="241" column="39" selection-start-line="241" selection-start-column="39" selection-end-line="241" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lblock.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="134" column="37" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
+        <state relative-caret-position="190">
+          <caret line="150" column="53" selection-start-line="150" selection-start-column="53" selection-end-line="150" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/player.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+        <state relative-caret-position="182">
+          <caret line="189" column="25" selection-start-line="189" selection-start-column="25" selection-end-line="189" selection-end-column="25" />
         </state>
       </provider>
     </entry>

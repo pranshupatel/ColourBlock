@@ -36,7 +36,7 @@ class SquareBlock(Block):
 
     def move_left(self):
         """
-        Move this TBlock to the left
+        Move this SquareBlock to the left
         """
         l_coords = []
         for node in self._nodes:
@@ -66,7 +66,7 @@ class SquareBlock(Block):
 
     def _move_node_right(self, coord):
         """
-        Move the node of this TBlock to the right
+        Move the node of this SquareBlock to the right
         :param node: Node
         """
         row = coord[1]
@@ -82,7 +82,7 @@ class SquareBlock(Block):
 
     def move_right(self):
         """
-        Move this TBlock to the right
+        Move this SquareBlock to the right
         """
         l_coords = []
         for node in self._nodes:
@@ -99,7 +99,7 @@ class SquareBlock(Block):
 
     def _move_node_down(self, coord):
         """
-        Move the TBlock's node down 1 row
+        Move the SquareBlock's node down 1 row
         :param node: Node
         """
         row = coord[1]
@@ -116,7 +116,7 @@ class SquareBlock(Block):
 
     def traverse_down_1row(self):
         """
-        Move the TBlock down 1 row
+        Move the SquareBlock down 1 row
         """
         l_coords = []
         for node in self._nodes:
