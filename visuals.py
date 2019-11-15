@@ -24,6 +24,7 @@ class Visuals:
         _move_delay: the length of time between each user move
         _quick_drop: whether to drop the block quicker or normal speed
         _quick_drop_factor: how many times faster should the block fall when pressing down
+        _quit: whether the user quit the game
     """
 
     _width: int
@@ -34,6 +35,7 @@ class Visuals:
     _move_delay: int
     _quick_drop: True
     _quick_drop_factor: int
+    _quit: bool
 
     def __init__(self, width: int, height: int, tick: int, font: str, controller=None, move_delay=50, factor=8):
         """ Width, height, tick speed and font for the pygame window
@@ -51,6 +53,7 @@ class Visuals:
         self._move_delay = move_delay
         self._quick_drop = False
         self._quick_drop_factor = factor
+        self._quit = False
 
     def play(self, grid: Grid) -> None:
         """ Set up a pygame window with the passed in grid """
@@ -60,7 +63,10 @@ class Visuals:
         pygame.display.set_caption("Colour Block")
 
         self.frame(screen, grid)
-        self.end_game(grid)
+        # if here then user lost the game
+        if not self._quit:
+            # only call end game if game not over
+            self.end_game(screen, grid)
 
     def update_tick(self, new_tick:int) -> None:
         """ Update the tick length to the new tick length
@@ -95,8 +101,10 @@ class Visuals:
                 if event.type == pygame.QUIT or not keep_playing:
                     # user closed the window
                     print("user closed game")
+                    self._quit = True
                     # stop the game
                     pygame.quit()
+                    self.quit_game()
                     return
 
 
@@ -180,7 +188,6 @@ class Visuals:
         text_rect.center = (self._width // 2, self._height // 7.5)
         screen.blit(resume_text, text_rect)
         
-        # pygame.draw.rect(screen, (84,89,97, 5), (0,0, self._width, self._height))
         pygame.display.update()
 
         # pause the game
@@ -194,10 +201,67 @@ class Visuals:
                     if event.key == pygame.K_ESCAPE:
                         return True
     
-    def end_game(self, grid: Grid) -> None:
+    def end_game(self, screen: pygame.display ,grid: Grid) -> None:
         """ Run when the game is over
             Display the score
         """
         print("game is over")
         print("final score = ", grid.get_score())
-        pygame.quit()
+
+        # open menu
+        surface = pygame.Surface((self._width, self._height))
+        surface.set_alpha(128)
+        surface.fill((0,0,0))
+
+        screen.blit(surface, (0,0))
+
+        # draw the text
+        font = pygame.font.SysFont(self._font, 32)
+
+        pause_text = font.render("Game Over", True, (255,255,255))
+        text_rect = pause_text.get_rect()
+        text_rect.center = (self._width // 2, self._height // 20)
+        screen.blit(pause_text, text_rect)
+
+        score_text = font.render("Final Score: " + str(self._player.get_score()), 32, (255,255,255))
+        text_rect = score_text.get_rect()
+        text_rect.center = (self._width // 2, self._height // 7.5)
+        screen.blit(score_text, text_rect)
+
+        continue_text = font.render("Press any key", 24, (255,255,255))
+        text_rect = continue_text.get_rect()
+        text_rect.center = (self._width // 2, self._height // 4)
+        screen.blit(continue_text, text_rect)
+
+        continue_text = font.render("to restart", 24, (255,255,255))
+        text_rect = continue_text.get_rect()
+        text_rect.center = (self._width // 2, self._height // 3.25)
+        screen.blit(continue_text, text_rect)
+        
+        pygame.display.update()
+
+        restart = False
+
+        # wait for player to hit a key to restart
+        while not restart:
+            for event in pygame.event.get():
+                # player wants to quit
+                if event.type == pygame.QUIT:
+                    self._quit = True
+                    self.quit_game()
+                    return False
+                # player wants to restart
+                if event.type == pygame.KEYDOWN:
+                    restart = True
+
+        if self._player:
+            self._player.lose()
+
+    def quit_game(self) -> None:
+        """ After the user has closed pygame window,
+            exit the loop in game.py
+
+            Do this by sending to player that game is over and do not 
+            restart the game
+        """
+        self._player.lose(False)

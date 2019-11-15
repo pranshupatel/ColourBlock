@@ -39,7 +39,7 @@ PADDING = 5
 DELAY = 50
 
 """ === Drop Factor === """
-FACTOR = 8
+FACTOR = 10
 
 """ Author: Pranshu Patel """
 class Player:
@@ -54,6 +54,8 @@ class Player:
         _block - The current block that the character is in control of.
         _grid - The grid that the current game is using
         _vis - The visuals for the game
+        _has_lost - whether the game is finished (ie user lost)
+        _has_quit - whether the user has quit the game
      """
     _name: str
     _time: int
@@ -62,6 +64,8 @@ class Player:
     _block: block.Block
     _grid: Grid
     _vis: Visuals
+    _has_lost: bool
+    _has_quit: bool
 
     def __init__(self, name: str, time: int):
         """Initialize the new character entering the game.
@@ -73,6 +77,8 @@ class Player:
         self._history = []
         self._vis = Visuals(WIDTH, HEIGHT, TICK_LENGTH, FONT, self, DELAY, FACTOR)
         self._block = None
+        self._has_lost = False
+        self._has_quit = False
         self.setup_grid()
         self.start_game()
 
@@ -107,6 +113,14 @@ class Player:
     def get_grid(self) -> Grid:
         """ Return a copy of the grid """
         return self._grid
+
+    def has_lost(self) -> bool:
+        """ Return whether the user has lost this game yet"""
+        return self.has_lost
+
+    def has_quit(self) -> bool:
+        """ Return whether the user has quit """
+        return self._has_quit
 
     def update_history(self):
         """ Update the history of this character after the
@@ -163,7 +177,6 @@ class Player:
             if pos[0] == move_dict[dir]:
                 return False
             # if the node to the left or right is occupied, do not move into it
-            # print("pos 0 = ",pos[0], "pos 1 = ", pos[1])
             if grid[pos[1]][pos[0] + dir].get_filled():
                 return False
 
@@ -200,7 +213,7 @@ class Player:
             self._block = zblock.ZBlock(self._grid)
 
         self.set_block_control(True)
-        print("block: ", self._block._name)
+        # print("block: ", self._block._name)
 
     def play_move(self, move=0, rotate=False) -> None:
         """ Play one move in the game
@@ -280,10 +293,6 @@ class Player:
                 # CHECK IF GAME IS OVER
                 # if a block that high collides, game is over
                 if y <= 2:
-
-                    print(pos)
-                    print(below.get_coords())
-                    print(below.get_colour())
                     self._grid.set_game_over()
 
                 self.create_block()
@@ -302,7 +311,6 @@ class Player:
         """
         self._grid.clear_lines()
         self.update_score()
-        print(self._score)
 
     def set_block_control(self, status) -> None:
         """ Set the status of each node of the curr
@@ -324,6 +332,12 @@ class Player:
         for i in range(len(self._block._nodes)):
             self._block._nodes[i].set_filled(status)
 
-if __name__ == "__main__":
-    player = Player("player 1", 500)
-
+    def lose(self, restart=True) -> None:
+        """ Signify this user has lost this game
+            No moves possible
+        """
+        self._has_lost = True
+        if not restart:
+            # user does not want to restart
+            print("quit")
+            self._has_quit = True
