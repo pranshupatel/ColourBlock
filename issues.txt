@@ -4,6 +4,13 @@ List Issues Here
 
 -
 
+List Minor Issues Here
+
+1. Certain rotations do not work at the first or last columns (ex. right facing T-Block all the way at the left)
+2. Clearing multiple lines at once leaves behind empty space temporarily
+
+-
+
 Resolved Issues
 
 1. Cleared lines needs to push down every row above it by 1
