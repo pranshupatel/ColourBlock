@@ -1,7 +1,6 @@
 List Issues Here
 
-1. Block rotation needs to be implemented
-2. Blocks nodes do not always stay coloured when moving left and right (Fix blocks disappearing as they move left or right)
+1. Score needs to be shown to user in the pygame window
 
 -
 
@@ -12,3 +11,5 @@ Resolved Issues
 3. Collision detection on left side: needs to be implemented so that wrap-around doesn't occur
 4. Have block movement left and right be independent of fall timer (Moving/rotating blocks should work independently of block-falling timer)
 5. Collision detection on blocks: if the node is filled, don't move the block into the filled node
+6. Block rotation needs to be implemented
+7. Blocks nodes do not always stay coloured when moving left and right (Fix blocks disappearing as they move left or right)
