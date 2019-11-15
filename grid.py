@@ -181,7 +181,8 @@ class Grid:
                 lines_cleared += 1
 
         # increase score according to project plan
-        self._score += 50 * (2 ** lines_cleared)
+        if lines_cleared != 0: # only increase if line has been cleared
+            self._score += 50 * (2 ** lines_cleared)
 	
 	# fill in newly cleared rows with above nodes
         y = 23

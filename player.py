@@ -302,6 +302,7 @@ class Player:
         """
         self._grid.clear_lines()
         self.update_score()
+        print(self._score)
 
     def set_block_control(self, status) -> None:
         """ Set the status of each node of the curr
