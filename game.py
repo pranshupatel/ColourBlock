@@ -11,11 +11,12 @@ def play():
     while True:
         player = Player("name", 1)
 
-        print("GAME OVER")
-
         # if here player has lost the game or quit
         if player.has_quit():
             break
+
+        print("GAME OVER")
+
 
 if __name__ == "__main__":
     play()

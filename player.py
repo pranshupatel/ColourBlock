@@ -348,5 +348,4 @@ class Player:
         self._has_lost = True
         if not restart:
             # user does not want to restart
-            print("quit")
             self._has_quit = True
