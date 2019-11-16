@@ -56,6 +56,7 @@ class Player:
         _vis - The visuals for the game
         _has_lost - whether the game is finished (ie user lost)
         _has_quit - whether the user has quit the game
+        _last_block - the int id of the last block spawned
      """
     _name: str
     _time: int
@@ -66,6 +67,7 @@ class Player:
     _vis: Visuals
     _has_lost: bool
     _has_quit: bool
+    _last_block: int
 
     def __init__(self, name: str, time: int):
         """Initialize the new character entering the game.
@@ -79,6 +81,7 @@ class Player:
         self._block = None
         self._has_lost = False
         self._has_quit = False
+        self._last_block = -1
         self.setup_grid()
         self.start_game()
 
@@ -195,7 +198,13 @@ class Player:
         if self._block:
             return
 
-        block_type = rand(0, 6)
+        # ensure new block picked is not the same as old block
+        block_type = self._last_block
+        while block_type == self._last_block:
+            #if type is chosen to be 0, only accepted if last block was not 0
+            block_type = rand(0, 6)
+
+        self._last_block = block_type
         # begin switch case
         if block_type == 0:
             self._block = iblock.IBlock(self._grid)
