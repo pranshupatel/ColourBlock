@@ -171,7 +171,8 @@ class L_oppositeBlock(Block):
             try:
                 row = curr_node3[1]
                 col = curr_node3[0]
-                if self.grid[row + 1][col - 1].get_colour() == self._default_colour \
+                if col > 0 and \
+                        self.grid[row + 1][col - 1].get_colour() == self._default_colour \
                         and self.grid[row-1][col].get_colour() == self._default_colour \
                         and self.grid[row - 1][col - 1].get_colour() == self._default_colour:
 

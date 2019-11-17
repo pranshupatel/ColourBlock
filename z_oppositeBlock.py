@@ -166,7 +166,7 @@ class Z_oppositeBlock(Block):
             try:
                 row = curr_node3[1]
                 col = curr_node3[0]
-                if col > 0 and self.grid[row][col-2].get_colour() == self._default_colour\
+                if col > 1 and self.grid[row][col-2].get_colour() == self._default_colour\
                         and self.grid[row][col-1].get_colour() == self._default_colour:
 
                     self._nodes[1] = self.grid[curr_node2[1]][curr_node2[0]]
