@@ -162,6 +162,10 @@ class Visuals:
                 pygame.draw.rect(screen, colour, (pos[0], pos[1], length, length))
         pygame.display.update()
 
+    def show_score(self, screen: pygame.display) -> None:
+        """Display the score in the pause menu, and while current game is running."""
+        # CURRENTLY UNIMPLEMENTED
+
     def pause_game(self, screen: pygame.display) -> bool:
         """ Pause the game until the user presses the resume key
             return true if user wants to resume, false if want to quit
@@ -183,10 +187,18 @@ class Visuals:
         text_rect.center = (self._width // 2, self._height // 20)
         screen.blit(pause_text, text_rect)
 
-        resume_text = font.render("press esc to resume", 32, (255,255,255))
+        resume_text = font.render("press esc to resume", 32, (255, 255, 255))
         text_rect = resume_text.get_rect()
         text_rect.center = (self._width // 2, self._height // 7.5)
         screen.blit(resume_text, text_rect)
+
+        # Update Score on pause menu
+        score_text = font.render("Current Score: " + str(self._player.get_score()), 32, (255, 255, 255))
+        text_rect = score_text.get_rect()
+        text_rect.center = (self._width // 2, self._height // 3)
+        screen.blit(score_text, text_rect)
+
+        self.show_score(screen)
         
         pygame.display.update()
 
