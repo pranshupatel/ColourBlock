@@ -224,7 +224,7 @@ This class keeps track of the player's score, and stores it in a text file after
 
 ## <a name="closing"></a>Closing
 
-[insert closing here]
+Colour Block is a rendition of the classic game of Tetris. The game provides a challenge by continuously requiring the player to find placement of blocks in order to clear entire lines and score points. Colour Block has very high replayability and is an excellent exercise for one’s brain. We encourage everyone to download and play the game as well as spicing the game up by extending it with your own features.
 
 [Return to Table of Contents](#table-of-contents)
 
