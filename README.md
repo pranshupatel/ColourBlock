@@ -150,7 +150,7 @@ Methods in the Grid class handle collision detection, check for full rows to cle
 
 ![All blocks](/images/all-blocks.png)
 
-The Block class contains a reference to four Node instances, whose coordinates are connected together to form a block.
+The Block class contains a reference to four Node instances, whose coordinates are connected together to form a block. The first node in the list is regarded as the center of rotation.
 
 This class asks the Grid instance to assign colours to the Node instances.
 
