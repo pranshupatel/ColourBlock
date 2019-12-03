@@ -212,6 +212,41 @@ This class keeps track of the player's score, and stores it in a text file after
 
 ## <a name="major-methods"></a>Major Methods
 
+### Grid
+
+#### clear_lines
+This method first checks if the grid has a full line. If it does, it shifts the whole grid down so that the full line is now replaced with the row that was above it. This method also updates the grid's score after the line is cleared.
+
+### Block (including all subclasses)
+
+#### rotate (abstract)
+This method rotates the specified block that the player currently has control of by 90 degrees. It does this by adjusting the nodes that are stored in it's _nodes attribute to the new rotated position. It should be accessed only through the player class and not from any other. It is called when the player presses the UP arrow key.
+
+#### move_left / move_right / traverse_down_1row (abstract)
+These methods move the specified block to the corresponding direction. It does this by shifting the location of each node in the _nodes attribute by 1 unit towards the corresponsing direction. They should be accessed only through the player class and not from any other. The move methods are called when the player presses the corresponding LEFT, RIGHT, or DOWN arrow keys.
+
+
+### Visual
+
+#### render_grid
+This method is responsible for drawing the actual tetris board onto the pygame window. It uses information from it's grid parameter, and draws it accordingly.
+
+#### frame
+This method is where the main loop of the game is implemented. An infinite loop constantly updates the visuals after every player action is made such as rotate, move, pause game, or end game. The loop only terminates once the grid is completely full, or the player quits the game.
+
+#### play
+This is the method which starts up the visuals. It initiazes the pygame window, and calls the frame method in order to start up the main loop.
+
+### Player
+
+#### create_block
+This method creates a random block instance, and spawns it in the game. It does this by setting the player's _block attribute to the block instance that was created.
+
+#### move_block_left, move_block_right, rotate_block, block_fall
+All these methods make the specified action to the player's current block. They do this by calling the corresponding move method from the block class that is stored in the player's _block attribute. Each move method checks whether the move is valid first, then makes the move if it is.
+
+#### clear_lines
+This method simply clears the grid's full line (by calling grid.clear_lines()) and updates the player's score to match the score of the grid.
 
 
 [Return to Table of Contents](#table-of-contents)
