@@ -217,7 +217,7 @@ This class keeps track of the player's score, and stores it in a text file after
 #### clear_lines
 This method first checks if the grid has a full line. If it does, it shifts the whole grid down so that the full line is now replaced with the row that was above it. This method also updates the grid's score after the line is cleared.
 
-### Block (including all subclasses)
+### Block (abstract) 
 
 #### rotate (abstract)
 This method rotates the specified block that the player currently has control of by 90 degrees. It does this by adjusting the nodes that are stored in it's _nodes attribute to the new rotated position. It should be accessed only through the player class and not from any other. It is called when the player presses the UP arrow key.
@@ -248,7 +248,7 @@ All these methods make the specified action to the player's current block. They 
 #### clear_lines
 This method simply clears the grid's full line (by calling grid.clear_lines()) and updates the player's score to match the score of the grid.
 
-#### 7 Block classes
+### 7 Block subclasses
 
 Each block will have its own colour as an attribute. If one wants a different colour, they simply need to alter this attribute (Do not change the colour of the block to the grid's colour, or else the functionality of the block will not work as intended).
 
@@ -259,10 +259,11 @@ Move the block to the right by 1 node. This method assumes the move is possible 
 Move the block to the left by 1 node. This method assumes the move is possible before the invocation of this method.
 
 #### traverse_down_1row
-Move the block down by 1 node. This method assumes the move is possible before the invocation of this method
+Move the block down by 1 node. This method assumes the move is possible before the invocation of this method.
 
 #### rotate
-Each block will have 4 different snapshots. This method check the current snapshot and rotate to the following snapshot from the current snapshot. This method do not assume the rotate is valid, and it has to check for the validity of the rotation invocation
+Each block will have 4 different snapshots. This method check the current snapshot and rotate to the following snapshot from the current snapshot. This method do not assume the rotate is valid, and it has to check for the validity of the rotation invocation manually.
+
 [Return to Table of Contents](#table-of-contents)
 
 ## <a name="how-to-extend-colour-block"></a>How to Extend Colour Block
@@ -292,4 +293,5 @@ Colour Block is a rendition of the classic game of Tetris. The game provides a c
     * I implemented all coding aspects of blocks and the behaviours that all the other classes will access. Rotation implementation directly inherited from Harvin's description, with slight modification that is having each rotation being a snapshot to reduce duplicate checks. 
   * README.md contributions
     * I contributed to README.md by adding in the major methods of the blocks. If one wants to modify the behaviour and attributes of the blocks, then these methods are the main point of focus, as they are the main functionalities. I have also added the section in blocks that is the weakest (rotate methods) and could use better implementation, or perhaps reimplementation if one wants to extend the block classes and to improve the algorithmic runtime. 
+
 [Return to Table of Contents](#table-of-contents)
