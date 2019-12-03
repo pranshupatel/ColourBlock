@@ -293,5 +293,11 @@ Colour Block is a rendition of the classic game of Tetris. The game provides a c
     * I implemented all coding aspects of blocks and the behaviours that all the other classes will access. Rotation implementation directly inherited from Harvin's description, with slight modification that is having each rotation being a snapshot to reduce duplicate checks. 
   * README.md contributions
     * I contributed to README.md by adding in the major methods of the blocks. If one wants to modify the behaviour and attributes of the blocks, then these methods are the main point of focus, as they are the main functionalities. I have also added the section in blocks that is the weakest (rotate methods) and could use better implementation, or perhaps reimplementation if one wants to extend the block classes and to improve the algorithmic runtime. 
+    
+* Yan Chen (Ryan)
+  * Code Contributions
+    * My contribution to the code consists of the creation of test files for the Node, Grid classes in the project (node_test.py and grid_test.py).
+  * README.md contributions
+    * I added the closing paragraph to summarize the project as a whole. I also added the license information to the readme.
 
 [Return to Table of Contents](#table-of-contents)
