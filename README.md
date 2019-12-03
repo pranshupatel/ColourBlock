@@ -1,4 +1,4 @@
-# Colour Block
+﻿# Colour Block
 
 ![Colour Block Logo](/images/colourblock-final-2.png)
 
@@ -248,11 +248,26 @@ All these methods make the specified action to the player's current block. They 
 #### clear_lines
 This method simply clears the grid's full line (by calling grid.clear_lines()) and updates the player's score to match the score of the grid.
 
+#### 7 Block classes
 
+Each block will have its own colour as an attribute. If one wants a different colour, they simply need to alter this attribute (Do not change the colour of the block to the grid's colour, or else the functionality of the block will not work as intended).
+
+#### move_right
+Move the block to the right by 1 node. This method assumes the move is possible before the invocation of this method.
+
+#### move_left
+Move the block to the left by 1 node. This method assumes the move is possible before the invocation of this method.
+
+#### traverse_down_1row
+Move the block down by 1 node. This method assumes the move is possible before the invocation of this method
+
+#### rotate
+Each block will have 4 different snapshots. This method check the current snapshot and rotate to the following snapshot from the current snapshot. This method do not assume the rotate is valid, and it has to check for the validity of the rotation invocation
 [Return to Table of Contents](#table-of-contents)
 
 ## <a name="how-to-extend-colour-block"></a>How to Extend Colour Block
-
+#### rotate
+One aspect to extend or perhaps improve, is the rotation methods. Currently with its messy manual algorithm, the codes suffer from lack of readability and performance. The method does the switch by changing 3 out of the 4 nodes of the block(1 node is being represented as the center of rotation) to its next snapshot's nodes. One possible improvement is having better communication between Visual/Player and the block in control to shorten the rotate algorithm. To follow the same pattern with the verification of the move conducted by the player instance, perhaps one could move the validity check of the rotation outside of the block classes
 
 
 [Return to Table of Contents](#table-of-contents)
@@ -272,4 +287,9 @@ Colour Block is a rendition of the classic game of Tetris. The game provides a c
   * README.md contributions
     * My major contribution to the README.md file is the significant expansion of the readme with the addition of lots of information and graphics. I added in 5 new sections (Description of Directory Structure, Major Classes, Major Methods, How to Extend Colour Block, Individual Contributions) and revamped 4 existing sections (Project Description, How to Install and Run Colour Block, How to Play Colour Block, High-level Code Documentation). I added in some information into these sections as well. In particular, I added a ton of information to the Project Description section.
 
+* Wilson:
+  * Code contributions
+    * I implemented all coding aspects of blocks and the behaviours that all the other classes will access. Rotation implementation directly inherited from Harvin's description, with slight modification that is having each rotation being a snapshot to reduce duplicate checks. 
+  * README.md contributions
+    * I contributed to README.md by adding in the major methods of the blocks. If one wants to modify the behaviour and attributes of the blocks, then these methods are the main point of focus, as they are the main functionalities. I have also added the section in blocks that is the weakest (rotate methods) and could use better implementation, or perhaps reimplementation if one wants to extend the block classes and to improve the algorithmic runtime. 
 [Return to Table of Contents](#table-of-contents)
