@@ -262,7 +262,7 @@ Move the block to the left by 1 node. This method assumes the move is possible b
 Move the block down by 1 node. This method assumes the move is possible before the invocation of this method.
 
 #### rotate
-Each block will have 4 different snapshots. This method check the current snapshot and rotate to the following snapshot from the current snapshot. This method do not assume the rotate is valid, and it has to check for the validity of the rotation invocation manually.
+Each block, except for the square_block, will have 4 different snapshots, each representing an orientation of the block. This method checks the current snapshot and rotate to the following snapshot from the current snapshot. This method do not assume the rotate is valid, therefore it checks for the validity of the rotation invocation manually.
 
 [Return to Table of Contents](#table-of-contents)
 
