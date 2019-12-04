@@ -217,16 +217,6 @@ This class keeps track of the player's score, and stores it in a text file after
 
 This method first checks if the grid has a full line. If it does, it shifts the whole grid down so that the full line is now replaced with the row that was above it. This method also updates the grid's score after the line is cleared.
 
-## Block (abstract) 
-
-### rotate (abstract)
-
-This method rotates the specified block that the player currently has control of by 90 degrees. It does this by adjusting the nodes that are stored in it's _nodes attribute to the new rotated position. It should be accessed only through the player class and not from any other. It is called when the player presses the UP arrow key.
-
-### move_left / move_right / traverse_down_1row (abstract)
-
-These methods move the specified block to the corresponding direction. It does this by shifting the location of each node in the _nodes attribute by 1 unit towards the corresponsing direction. They should be accessed only through the player class and not from any other. The move methods are called when the player presses the corresponding LEFT, RIGHT, or DOWN arrow keys.
-
 ## Visuals
 
 ### render_grid
@@ -259,19 +249,19 @@ This method simply clears the grid's full line (by calling grid.clear_lines()) a
 
 Each block will have its own colour as an attribute. If one wants a different colour, they simply need to alter this attribute (Do not change the colour of the block to the grid's colour, or else the functionality of the block will not work as intended).
 
-### move_right
+### move_right (abstract)
 
 Move the block to the right by 1 node. This method assumes the move is possible before the invocation of this method.
 
-### move_left
+### move_left (abstract)
 
 Move the block to the left by 1 node. This method assumes the move is possible before the invocation of this method.
 
-### traverse_down_1row
+### traverse_down_1row (abstract)
 
 Move the block down by 1 node. This method assumes the move is possible before the invocation of this method.
 
-### rotate
+### rotate (abstract)
 
 Each block, except for the square_block, will have 4 different snapshots, each representing an orientation of the block. This method checks the current snapshot and rotate to the following snapshot from the current snapshot. This method do not assume the rotate is valid, therefore it checks for the validity of the rotation invocation manually.
 
