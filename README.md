@@ -57,6 +57,8 @@ Colour Block is a recreation of the original version of Tetris, one of the most 
 
 ## <a name="project-description-gameplay"></a>Gameplay
 
+![Colour Block Gameplay](/images/gameplay.png)
+
 From the top of the screen, a block made up of four squares falls to the bottom of the 20-by-10 grid. The block can move left and right and rotate clockwise while it falls. The drop speed of the block can also be increased manually. Once the block hits the bottom, though, it can no longer move and another block drops from the top of the screen.
 
 The goal is to fill up each row of the grid with squares, and clear these rows. Clearing rows is awarded with points, with more points given for clearing more rows at once. After a row is cleared, it is filled in by the above rows which move down.
@@ -96,9 +98,7 @@ To run the game, simply run game.py from the Python console, a command line, or 
 
 # <a name="how-to-play"></a>How to Play Colour Block
 
-![Colour Block Gameplay](/images/gameplay.png)
-
-* Use the **left and right arrow keys** to move blocks.
+* Use the **left** and **right arrow keys** to move blocks.
 * The **up key** rotates blocks in a clockwise manner.
 * The **down key** increases how quickly the blocks fall.
 * When a row is full of blocks, it will be cleared and all the rows above it will come down. This earns points for the player.
@@ -112,7 +112,7 @@ This section provides a high-level overview of the code documentation for Colour
 
 Colour Block uses the Model-View-Controller design pattern. The file game.py creates a new instance of the Player class, which in turn creates and instance of Grid and Visuals classes. These classes work together to form the core of the gameplay.
 
-The Grid class serves as the back-end of the game. It is an array of enlarged pixels that is 24 units tall and 10 units wide. The Visuals class renders Blocks and clears them from the grid based on their colour and filled statuses.
+The Grid class serves as the back-end of the game. It is an array of squares that is 24 units tall and 10 units wide. The Visuals class renders Blocks and clears them from the grid based on their colour and filled statuses.
 
 The Visuals class is the front-end of the game. It takes in the grid from the Grid class and renders it to the screen. It also handles the pause function and allows the player to restart the game if they lose.
 
@@ -136,19 +136,19 @@ All of the Python files exist in the root of the directory. They are all that ar
 
 ## <a name="major-classes-node"></a>Node
 
-The Node class represents one square (enlarged pixel) on the grid. Each instance of Node has seven attributes:
+The Node class represents one square on the grid. Each instance of Node has seven attributes:
 
 * colour
 * _background_colour (its default colour)
 * _position (in pixel coordinates)
 * _length (how long it is in actual pixels)
 * _coords (its position in the Grid class, described below)
-* _in_control (whether this node belongs to a in control block)
+* _in_control (whether this node belongs to an active block)
 * _filled (described in Grid)
 
 However, the two most important attributes are colour and _coords (the coordinates).
 
-A Block class is made up of four Node instances. When a block moves, the old nodes are reset to their original colours and the new nodes change to their block's colour. This allows the user to see the blocks fall, although this is really an illusion as all that happens is that the nodes switch colours and _filled attributes.
+A Block class is made up of four Node instances. When a block moves, the old nodes are reset to their original colours and the new nodes change to their block's colour. This allows the user to see the blocks fall, although this is really an illusion, as all that happens is that the nodes switch colours and _filled attributes.
 
 The structure of the Node class allows for the easy movement and rotation of blocks. The Node class is heavily used by other objects to run the game.
 
@@ -196,11 +196,7 @@ Finally, the Visuals class also handles the user pausing and restarting the game
 
 The Player class is how the player interacts with the game. It creates new instances of the Grid and Visuals classes, and interacts with them to control the gameplay. For example, it will ask the Grid instance to move a block.
 
-This class takes input from the Visuals class, and moves or rotates a block based on the input.
-
-This class will store a block for later, which is a good feature to have because...
-
-This class keeps track of the player's score, and stores it in a text file after the game has ended.
+This class takes input from the Visuals class, and moves or rotates a block based on the input. It also keeps track of the player's score, and stores it in a text file after the game has ended.
 
 [Return to Table of Contents](#table-of-contents)
 
