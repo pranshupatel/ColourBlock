@@ -72,16 +72,16 @@ class test_methods(test_grid):
     def test_linefull1(self):
         """ test with all blocks filled
         """
-        self.g._nodes[24].append(self.n1)
-        self.g._nodes[24].append(self.n1)
-        self.g._nodes[24].append(self.n1)
-        self.g._nodes[24].append(self.n1)
-        self.g._nodes[24].append(self.n1)
-        self.g._nodes[24].append(self.n1)
-        self.g._nodes[24].append(self.n1)
-        self.g._nodes[24].append(self.n1)
-        self.g._nodes[24].append(self.n1)
-        self.g._nodes[24].append(self.n1)
+        self.g._nodes[23].append(self.n1)
+        self.g._nodes[23].append(self.n1)
+        self.g._nodes[23].append(self.n1)
+        self.g._nodes[23].append(self.n1)
+        self.g._nodes[23].append(self.n1)
+        self.g._nodes[23].append(self.n1)
+        self.g._nodes[23].append(self.n1)
+        self.g._nodes[23].append(self.n1)
+        self.g._nodes[23].append(self.n1)
+        self.g._nodes[23].append(self.n1)
         expected = True
         actual = self.g.is_line_full(24)
         self.assertEqual(expected, actual)
