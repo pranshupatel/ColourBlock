@@ -57,7 +57,7 @@ If the player cannot clear rows fast enough, the blocks will pile up and fill th
 
 ## Obstacles
 
-The blocks fall at a speed which increases as more rows are cleared. The drop speed starts at three-fourths of a second (750 ms), and that speed decreases by 50 ms for every 2,000 points scored. For example, scoring 4,000 points would put the drop speed at 650 ms. This drop speed can decrease no further than 125 ms, which occurs after scoring 26,000 points.
+The blocks fall at a speed which increases as more rows are cleared. The drop speed starts at 775 ms, and that speed decreases by 50 ms for every 2,000 points scored. For example, scoring 4,000 points would put the drop speed at 675 ms. This drop speed can decrease no further than 125 ms, which occurs after scoring 26,000 points.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -87,7 +87,7 @@ The **up key** rotates blocks in a clockwise manner.
 
 The **down key** increases how quickly the blocks fall.
 
-When a row is full of blocks it will be cleared, this earns points for the player.
+When a row is full of blocks, it will be cleared and all the rows above it will come down. This earns points for the player.
 
 The **escape key (Esc)** pauses the game.
 
@@ -107,7 +107,7 @@ Further details about these classes can be found in the [Major Classes](#major-m
 
 # <a name="description-of-directory-structure"></a>Description of Directory Structure
 
-All the python files exist in the root of the directory and are all that are required for the game to function. The images folder holds the images used in the README only. The remaining folders, .ideas, __pycache__, and venv, are for development purposes.
+All the Python files exist in the root of the directory, and are all that are required for the game to function. The **images** folder holds the images used in README.md only. The remaining folders, **.ideas**, **\_\_pycache\_\_**, and **venv**, are for development purposes.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -116,7 +116,7 @@ All the python files exist in the root of the directory and are all that are req
 * [Node](#node): the squares that make up the blocks
 * [Grid](#grid): the back end of the game that contains all the nodes and blocks (the Model)
 * [Block](#block): the blocks which the user controls as they fall to the bottom
-* [Visual](#visual): the front end of the game that renders the graphics (the View)
+* [Visuals](#visuals): the front end of the game that renders the graphics (the View)
 * [Player](#player): the class that processes most inputs and creates new instances of other classes (the Controller)
 
 ## <a name="node"></a>Node
@@ -183,9 +183,9 @@ There are seven sub-classes of Block, with each of them corresponding to a parti
 
 [Return to Major Classes](#major-classes)
 
-## <a name="visual"></a>Visual
+## <a name="visuals"></a>Visuals
 
-The Visual class uses pygame to render the graphics and the grid.
+The Visuals class uses pygame to render the graphics and the grid.
 
 The class takes in a Grid and is responsible to rendering it to the user. It does this by going through each Node in the Grid then drawing them. This happens in the render_grid method.
 
@@ -199,7 +199,7 @@ Finally, the Visuals class also handles the user pausing and restarting the game
 
 The Player class is how the player interacts with the game. It creates new instances of the Grid and Visuals classes, and interacts with them to control the gameplay. For example, it will ask the Grid instance to move a block.
 
-This class takes input from the Visual class, and moves or rotates a block based on the input.
+This class takes input from the Visuals class, and moves or rotates a block based on the input.
 
 This class will store a block for later, which is a good feature to have because...
 
@@ -227,7 +227,7 @@ This method rotates the specified block that the player currently has control of
 
 These methods move the specified block to the corresponding direction. It does this by shifting the location of each node in the _nodes attribute by 1 unit towards the corresponsing direction. They should be accessed only through the player class and not from any other. The move methods are called when the player presses the corresponding LEFT, RIGHT, or DOWN arrow keys.
 
-## Visual
+## Visuals
 
 ### render_grid
 
@@ -281,7 +281,7 @@ Each block, except for the square_block, will have 4 different snapshots, each r
 
 ### rotate
 
-One aspect to extend or perhaps improve, is the rotation methods. Currently with its messy manual algorithm, the codes suffer from lack of readability and performance. The method does the switch by changing 3 out of the 4 nodes of the block(1 node is being represented as the center of rotation) to its next snapshot's nodes. One possible improvement is having better communication between Visual/Player and the block in control to shorten the rotate algorithm. To follow the same pattern with the verification of the move conducted by the player instance, perhaps one could move the validity check of the rotation outside of the block classes
+One aspect to extend or perhaps improve, is the rotation methods. Currently with its messy manual algorithm, the codes suffer from lack of readability and performance. The method does the switch by changing 3 out of the 4 nodes of the block(1 node is being represented as the center of rotation) to its next snapshot's nodes. One possible improvement is having better communication between Visuals/Player and the block in control to shorten the rotate algorithm. To follow the same pattern with the verification of the move conducted by the player instance, perhaps one could move the validity check of the rotation outside of the block classes
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -295,7 +295,7 @@ Colour Block is a rendition of the classic game of Tetris. The game provides a c
 
 * Harvin:
   * Code contributions
-    * My contributions to the code include the addition of the _filled attribute to the Node class, the addition of a method in the Grid class to fill in cleared rows by pushing down all upper rows, and the documentation of a block rotation algorithm which was later implemented.
+    * My contributions to the code include the addition of the _filled attribute to the Node class, the addition of a method in the Grid class to fill in cleared rows by pushing down all upper rows, and the documentation of a block rotation algorithm which was later implemented. Another code contribution I made was the implementation of block drop speed decreases tied to points scored.
   * README.md contributions
     * My major contribution to the README.md file is the significant expansion of the readme with the addition of lots of information and graphics. I added in 5 new sections (Description of Directory Structure, Major Classes, Major Methods, How to Extend Colour Block, Individual Contributions) and revamped 4 existing sections (Project Description, How to Install and Run Colour Block, How to Play Colour Block, High-level Code Documentation). I added in some information into these sections as well. In particular, I added a ton of information to the Project Description section.
 
