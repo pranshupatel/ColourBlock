@@ -96,9 +96,9 @@ Use the **left and right arrow keys** to move blocks.
 
 The **up key** rotates blocks in a clockwise manner.
 
-The **down key** speeds up the fall.
+The **down key** increases how quickly the blocks fall.
 
-You earn points for clearing lines.
+When a row is full of blocks it will be cleared, this earns points for the player.
 
 The **escape key (Esc)** pauses the game.
 
@@ -106,23 +106,23 @@ The **escape key (Esc)** pauses the game.
 
 ## <a name="code-structure-high-level-code-documentation"></a>Code Structure (High-level Code Documentation)
 
-The game uses the Model-View-Controller design pattern. To run it, simply create an instance of the Player class. 
+The game uses the Model-View-Controller design pattern. game.py creates a new instance of the Player class, which in turn creates and instance of Grid and Visuals classes. These classes work together to form the core of the gameplay.
 
-The Player class creates an instance of the Grid (back-end) and Visual (front-end) classes.
+Grid serves as the backend of the game. It is a pixel array that is 24 tall and 10 wide. Blocks are rendered and cleared from the grid based on their colour. 
 
+Visuals is the front end. It takes in the grid and renders it to the screen. It also allow handles pausing and allowing the player to restart the game if they lose.
 
+Further details about these classes can be found in the [Major Classes](#major-methods) section.
 
 [Return to Table of Contents](#table-of-contents)
 
 ## <a name="description-of-directory-structure"></a>Description of Directory Structure
 
-
+All the python files exist in the root of the directory and are all that are required for the game to function. The images folder holds the images used in the README only. The remaining folders, .ideas, __pycache__, and venv, are for development purposes.
 
 [Return to Table of Contents](#table-of-contents)
 
 ## <a name="major-classes"></a>Major Classes
-
-< TODO - before December 4: add more information to this section and organize it...it is a very disconnected collection of information right now... >
 
 * Node: the squares that make up the blocks
 * Grid: the back end of the game that contains all the nodes and blocks (the Model)
@@ -132,9 +132,11 @@ The Player class creates an instance of the Grid (back-end) and Visual (front-en
 
 ### Node
 
-The Node class represents one square on the grid. This square is usually purple, but can be any other colour.
+The Node class represents one square on the grid. Each Node has 7 attributes: colour, background colour (its default colour), position (in pixel coordinates), length (the amount of pixels long it is), coords (its position in the Grid class, described below), in control (whether this node belongs to a in control block), and is filled (described in Grid).
 
-A Block class is made up of Node instances.
+The two most importand attributes however is the colour and coordinates (coords). 
+
+A Block class is made up of four Node instances. When a block moves the old Nodes are reset to their original colours and the new nodes changed to the blocks colour. This allows for the user to see the blocks fall when in reality all that happened was Nodes switching colours.
 
 The structure of the Node class allows for easy movement and rotation of blocks. The Node class is heavily used by other objects to run the game.
 
@@ -190,13 +192,11 @@ There are seven sub-classes of Block, with each of them corresponding to a parti
 
 The Visual class uses pygame to render the graphics and the grid.
 
-It uses a timer to carry out its functions.
+The class takes in a Grid and is responsible to rendering it to the user. It does this by going through each Node in the Grid then drawing them. This happens in the render_grid method.
 
-The class uses pixel coordinates.
+Visuals is also responsible for taking in keyboard input from the user and passing it to the Player class. This is done because pygame is responsible for collecting user input but Visuals lacks the ability to modify the Grid itself. The frame method is what handles this.
 
-The Visual class collects user input and sends it to the Player class. It ignores invalid commands.
-
-Methods in the Visual class handle the pause and restart functions.
+Finally, the Visuals class also handles the user pausing and restarting the game. This includes stopping the blocks from moving, rendering text to tell the player the game is over / paused, and resuming the game. These are done in their own methods called pause_game and end_game. 
 
 ### Player
 
@@ -287,6 +287,12 @@ Colour Block is a rendition of the classic game of Tetris. The game provides a c
     * My contributions to the code include the addition of the _filled attribute to the Node class, the addition of a method in the Grid class to fill in cleared rows by pushing down all upper rows, and the documentation of a block rotation algorithm which was later implemented.
   * README.md contributions
     * My major contribution to the README.md file is the significant expansion of the readme with the addition of lots of information and graphics. I added in 5 new sections (Description of Directory Structure, Major Classes, Major Methods, How to Extend Colour Block, Individual Contributions) and revamped 4 existing sections (Project Description, How to Install and Run Colour Block, How to Play Colour Block, High-level Code Documentation). I added in some information into these sections as well. In particular, I added a ton of information to the Project Description section.
+
+* Ajitesh Misra:
+   * Code contributions
+      * I created the Node, Grid, and Visuals classes while also adding to them as development continued. I also created game.py to allow the user to be able to run and restart the game easily. Grid and Node act as the framework for the game, allowing blocks to be moveed and rotated. It also allowed development to be clean and easy since the block implemtation does not modify that of Grid or Node. For a more detailed review, I implemented all of Visuals methods, most of Node save is_filled, and most of grid save for clear_lines. 
+    * README.md contributions
+        * I edited and added new additions to How to Play, Code structure and Major Classes. I also added the content of Description of Directory Structure. These new additions are further expanding on how to play by making it more descriptive, adding more detail to code structure so that it is easier to understand and expanded on the classes I worked on in the Major Classes section. For Description of Directory I explained how the code was laid out and explained the other folders used in the repo. 
 
 * Wilson:
   * Code contributions
