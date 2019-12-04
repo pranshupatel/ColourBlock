@@ -27,7 +27,7 @@ HEIGHT = 600 # 768 #
 FONT = 'Consolas'
 
 """ === CLOCK SPEED === """
-TICK_LENGTH = 500
+TICK_LENGTH = 775
 
 """ === BACKGROUND COLOUR ==="""
 COLOUR = (0, 32, 64)
@@ -315,11 +315,15 @@ class Player:
     def clear_lines(self) -> None:
         """ check if anylines are full on the grid
             grid will clear them for us and update the score
-
             Then we update the score in this class
+            And update the drop speed of the blocks
         """
         self._grid.clear_lines()
         self.update_score()
+        tick_update = self.get_score() // 20
+        if tick_update > 13: tick_update = 13
+        if (TICK_LENGTH - DELAY*tick_update) > 0:
+            self._vis.update_tick(TICK_LENGTH - DELAY*tick_update)
 
     def set_block_control(self, status) -> None:
         """ Set the status of each node of the curr
