@@ -6,17 +6,13 @@ Created by Ajitesh Misra, Pranshu Patel, Harvin Lachhar, Long Uy (Wilson) Nguyen
 
 Colour Block was created by a group of computer science students at the University of Toronto, Mississauga. This project was completed as part of a group assignment in the CSC290 course (Communication Skills for Computer Scientists).
 
+![Colour Block Tiny Logo](/images/colourblock-tiny.png)
+
 # <a name="table-of-contents"></a>Table of Contents
 
 1. [License](#license)
 2. [Project Description](#project-description)
-    * [Gameplay](#project-description-gameplay)
-    * [Points System](#project-description-points)
-    * [Losing Condition (Game Over)](#project-description-losing)
-    * [Obstacles](#project-description-obstacles)
 3. [How to Install and Run Colour Block](#how-to-install-and-run)
-    * [Install Colour Block](#how-to-install-and-run-install)
-    * [Run Colour Block](#how-to-install-and-run-run)
 4. [How to Play Colour Block](#how-to-play)
 5. [Code Structure Overview](#code-structure-overview)
 6. [Description of Directory Structure](#description-of-directory-structure)
@@ -28,33 +24,18 @@ Colour Block was created by a group of computer science students at the Universi
     * [Player](#major-classes-player)
 8. [Major Methods](#major-methods)
     * [Grid](#major-methods-grid)
-        * [clear_lines](#major-methods-grid-clear-lines)
     * [Block (abstract)](#major-methods-block)
-        * [rotate (abstract)](#major-methods-block-rotate)
-        * [move_left / move_right / traverse_down_1row (abstract)](#major-methods-block-move)
     * [Visuals](#major-methods-visuals)
-        * [render_grid](#major-methods-visuals-render-grid)
-        * [frame](#major-methods-visuals-frame)
-        * [play](#major-methods-visuals-play)
     * [Player](#major-methods-player)
-        * [create_block](#major-methods-player-create-block)
-        * [move_block_left, move_block_right, rotate_block, block_fall](#major-methods-player-move-block)
-        * [clear_lines](#major-methods-player-clear-lines)
     * [Block subclasses](#major-methods-block-subclasses)
-        * [move_right (abstract)](#major-methods-block-subclasses-move-right)
-        * [move_left (abstract)](#major-methods-block-subclasses-move-left)
-        * [traverse_down_1row (abstract)](#major-methods-block-subclasses-traverse)
-        * [rotate (abstract)](#major-methods-block-subclasses-rotate)
 9. [How to Extend Colour Block](#how-to-extend)
     * [Rotation](#how-to-extend-rotation)
-    * [Convert game file to executable](#how-to-extend-executable)
     * [Hold feature](#how-to-extend-hold)
     * [Ghost blocks](#how-to-extend-ghost-blocks)
     * [Block previews](#how-to-extend-block-previews)
+    * [Convert game file to executable](#how-to-extend-executable)
 10. [Closing](#closing)
 11. [Individual Contributions (Addendum)](#individual-contributions-addendum)
-
-![Colour Block Tiny Logo](/images/colourblock-tiny.png)
 
 # <a name="license"></a>License
 
@@ -89,11 +70,11 @@ The goal is to fill up each row of the grid with squares, and clear these rows. 
 
 ## <a name="project-description-losing"></a>Losing Condition (Game Over)
 
-If the player cannot clear rows fast enough, the blocks will pile up and fill the grid. Once immovable blocks fill up the grid and start to go out of bounds at the top, the game is over. Therefore, this game lasts as long as the player can clear rows quickly.
+If the player cannot clear rows fast enough, the blocks will pile up and fill the grid. Once immovable blocks fill up the grid and start to go out of bounds at the top, the game is over. Therefore, this game continues on as long as the player can clear rows quickly.
 
 ## <a name="project-description-obstacles"></a>Obstacles
 
-The blocks fall at a speed which increases as more rows are cleared. The drop speed starts at 775 ms, and that speed decreases by 50 ms for every 2,000 points scored. For example, scoring 4,000 points would put the drop speed at 675 ms. This drop speed can decrease no further than 125 ms, which occurs after scoring 26,000 points.
+The blocks fall at a speed which increases as more rows are cleared. The drop speed starts at 775 ms, and that speed decreases by 50 ms for every 2,000 points scored. For example, scoring 4,000 points would put the drop speed at 675 ms. This drop speed can decrease no further than 125 ms, which is what the drop speed is set to after scoring 26,000 points.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -129,11 +110,11 @@ To run the game, simply run game.py from the Python console, a command line, or 
 
 This section provides a high-level overview of the code documentation for Colour Block.
 
-The game uses the Model-View-Controller design pattern. game.py creates a new instance of the Player class, which in turn creates and instance of Grid and Visuals classes. These classes work together to form the core of the gameplay.
+Colour Block uses the Model-View-Controller design pattern. The file game.py creates a new instance of the Player class, which in turn creates and instance of Grid and Visuals classes. These classes work together to form the core of the gameplay.
 
-Grid serves as the backend of the game. It is a pixel array that is 24 tall and 10 wide. Blocks are rendered and cleared from the grid based on their colour. 
+The Grid class serves as the back-end of the game. It is an array of enlarged pixels that is 24 units tall and 10 units wide. The Visuals class renders Blocks and clears them from the grid based on their colour and filled statuses.
 
-Visuals is the front end. It takes in the grid and renders it to the screen. It also allow handles pausing and allowing the player to restart the game if they lose.
+The Visuals class is the front-end of the game. It takes in the grid from the Grid class and renders it to the screen. It also handles the pause function and allows the player to restart the game if they lose.
 
 Further details about these classes can be found in the [Major Classes](#major-methods) section.
 
@@ -141,7 +122,7 @@ Further details about these classes can be found in the [Major Classes](#major-m
 
 # <a name="description-of-directory-structure"></a>Description of Directory Structure
 
-All the Python files exist in the root of the directory, and are all that are required for the game to function. The **images** folder holds the images used in README.md only. The remaining folders, **.ideas**, **\_\_pycache\_\_**, and **venv**, are for development purposes.
+All of the Python files exist in the root of the directory. They are all that are required for the game to function. The **images** folder holds the images used in README.md only. The remaining folders, **.ideas**, **\_\_pycache\_\_**, and **venv**, are for development purposes.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -287,11 +268,7 @@ Each block, except for the square_block, will have 4 different snapshots, each r
 
 ## <a name="how-to-extend-rotation"></a>Rotation
 
-One aspect to extend or perhaps improve, is the rotation methods. Currently with its messy manual algorithm, the codes suffer from lack of readability and performance. The method does the switch by changing 3 out of the 4 nodes of the block(1 node is being represented as the center of rotation) to its next snapshot's nodes. One possible improvement is having better communication between Visuals/Player and the block in control to shorten the rotate algorithm. To follow the same pattern with the verification of the move conducted by the player instance, perhaps one could move the validity check of the rotation outside of the block classes
-
-## <a name="how-to-extend-executable"></a>Convert game file to executable
-
-Another aspect that can really help improve this game is converting the multi-file source folder into an exe file so that it can be downloaded and played from any windows computer without the requirement of having python and pygame installed. This will also clean up the game, as it will hide the implementation details and make it appear more professional.
+One aspect to extend, or perhaps improve, is the rotation methods. Currently, with its messy manual algorithm, the code suffers from a lack of readability and performance. The method does the switch by changing three out of the four nodes of the block to the nodes of its next snapshot. (For non-square- and non-I-blocks, one node stays constant/unchanged as the center of rotation.) One possible improvement is to have better communication between the Visuals class, the Player class, and the block in control to shorten the rotation algorithm. To follow the same design pattern with the verification of the move conducted by the Player class, one could perhaps move the validity check of the rotation outside of the block classes.
 
 ## <a name="how-to-extend-hold"></a>Hold feature
 
@@ -305,11 +282,15 @@ The ghost feature would allow players to see where a block would land before it 
 
 Block previews would allow players to see the next few blocks before they appear. An implementation of this function would require additional random number generations, as well as an overhaul of the graphical portion of the game to store the visuals of the previews.
 
+## <a name="how-to-extend-executable"></a>Convert game file to executable
+
+Another aspect that can really help improve Colour Block is to convert the multi-file source folder into a Windows executable file (.exe), so that users can download and play Colour Block from any Windows computer without having to install Python and pygame. This will also clean up the game, as it will hide the implementation details and make it appear more professional.
+
 [Return to Table of Contents](#table-of-contents)
 
 # <a name="closing"></a>Closing
 
-Colour Block is a rendition of the classic game of Tetris. The game provides a challenge by continuously requiring the player to find placement of blocks in order to clear entire lines and score points. Colour Block has very high replayability and is an excellent exercise for one’s brain. We encourage everyone to download and play the game as well as spicing the game up by extending it with your own features.
+Colour Block is a rendition of the classic game of Tetris. The game is a challenge that continuously requires the player to place blocks in order to clear entire lines and score points. Colour Block has very high replayability, and is an excellent exercise for the brain. We encourage everyone to download and play Colour Block, as well as spice the game up by extending it with your own features.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -319,7 +300,7 @@ Colour Block is a rendition of the classic game of Tetris. The game provides a c
   * Code contributions
     * My contributions to the code include the addition of the _filled attribute to the Node class, the addition of a method in the Grid class to fill in cleared rows by pushing down all upper rows, and the documentation of a block rotation algorithm which was later implemented. Another code contribution I made was the implementation of block drop speed decreases tied to points scored.
   * README.md contributions
-    * My major contribution to the README.md file is the significant expansion of the readme with the addition of lots of information and graphics. I added in 5 new sections (Description of Directory Structure, Major Classes, Major Methods, How to Extend Colour Block, Individual Contributions) and revamped 4 existing sections (Project Description, How to Install and Run Colour Block, How to Play Colour Block, High-level Code Documentation). I added in some information into these sections as well. In particular, I added a ton of information to the Project Description section.
+    * My major contribution to the README.md file is the significant expansion of the readme with the addition of lots of information and graphics. I added in 5 new sections (Description of Directory Structure, Major Classes, Major Methods, How to Extend Colour Block, Individual Contributions) and revamped 4 existing sections (Project Description, How to Install and Run Colour Block, How to Play Colour Block, High-level Code Documentation). I added in some information into these sections as well. In particular, I added a ton of information to the Project Description section, and extended the How to Extend Colour Block section.
 
 * Ajitesh Misra:
    * Code contributions
