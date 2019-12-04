@@ -269,9 +269,13 @@ Each block, except for the square_block, will have 4 different snapshots, each r
 
 # <a name="how-to-extend-colour-block"></a>How to Extend Colour Block
 
-### rotate
+### Rotation
 
 One aspect to extend or perhaps improve, is the rotation methods. Currently with its messy manual algorithm, the codes suffer from lack of readability and performance. The method does the switch by changing 3 out of the 4 nodes of the block(1 node is being represented as the center of rotation) to its next snapshot's nodes. One possible improvement is having better communication between Visuals/Player and the block in control to shorten the rotate algorithm. To follow the same pattern with the verification of the move conducted by the player instance, perhaps one could move the validity check of the rotation outside of the block classes
+
+### Convert Game File to Executable
+
+Another aspect that can really help improve this game is converting the multi-filesource folder into an exe file so that it can be downloaded and played from any windows computer without the requirement of having python and pygame installed. This will also clean up the game, as it will hide the implementation details and make it seem more professional. 
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -306,5 +310,12 @@ Colour Block is a rendition of the classic game of Tetris. The game provides a c
     * My contribution to the code consists of the creation of test files for the Node, Grid classes in the project (node_test.py and grid_test.py).
   * README.md contributions
     * I added the closing paragraph to summarize the project as a whole. I also added the license information to the readme.
+
+* Pranshu Patel
+  * Code Contributions
+    * I contributed to the code by creating and updating the player class. I created the initial layout of the player class, by planning out neccessary attributes and methods, while also implementing them as the game kept further developing. 
+  * README.md contributions
+    * I contributed the the README.md by adding and describing all the major methods for the Grid, Player, and Visuals classes. I also added a possible way to extend the project (by making the pygame a windows file).
+    
 
 [Return to Table of Contents](#table-of-contents)
