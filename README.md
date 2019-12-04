@@ -47,7 +47,10 @@ Colour Block was created by a group of computer science students at the Universi
         * [rotate (abstract)](#major-methods-block-subclasses-rotate)
 9. [How to Extend Colour Block](#how-to-extend)
     * [Rotation](#how-to-extend-rotation)
-    * [Convert Game File to Executable](#how-to-extend-executable)
+    * [Convert game file to executable](#how-to-extend-executable)
+    * [Hold feature](#how-to-extend-hold)
+    * [Ghost blocks](#how-to-extend-ghost-blocks)
+    * [Block previews](#how-to-extend-block-previews)
 10. [Closing](#closing)
 11. [Individual Contributions (Addendum)](#individual-contributions-addendum)
 
@@ -144,11 +147,11 @@ All the Python files exist in the root of the directory, and are all that are re
 
 # <a name="major-classes"></a>Major Classes
 
-* Node: the squares that make up the blocks
-* Grid: the back end of the game that contains all the nodes and blocks (the Model)
-* Block: the blocks which the user controls as they fall to the bottom
-* Visuals: the front end of the game that renders the graphics (the View)
-* Player: the class that processes most inputs and creates new instances of other classes (the Controller)
+* Node: The squares that make up the blocks.
+* Grid: The back end of the game that contains all the nodes and blocks (the Model).
+* Block: The blocks which the user controls as they fall to the bottom.
+* Visuals: The front end of the game that renders the graphics (the View).
+* Player: The class that processes most inputs and creates new instances of other classes (the Controller).
 
 ## <a name="major-classes-node"></a>Node
 
@@ -286,9 +289,21 @@ Each block, except for the square_block, will have 4 different snapshots, each r
 
 One aspect to extend or perhaps improve, is the rotation methods. Currently with its messy manual algorithm, the codes suffer from lack of readability and performance. The method does the switch by changing 3 out of the 4 nodes of the block(1 node is being represented as the center of rotation) to its next snapshot's nodes. One possible improvement is having better communication between Visuals/Player and the block in control to shorten the rotate algorithm. To follow the same pattern with the verification of the move conducted by the player instance, perhaps one could move the validity check of the rotation outside of the block classes
 
-## <a name="how-to-extend-executable"></a>Convert Game File to Executable
+## <a name="how-to-extend-executable"></a>Convert game file to executable
 
-Another aspect that can really help improve this game is converting the multi-filesource folder into an exe file so that it can be downloaded and played from any windows computer without the requirement of having python and pygame installed. This will also clean up the game, as it will hide the implementation details and make it seem more professional. 
+Another aspect that can really help improve this game is converting the multi-file source folder into an exe file so that it can be downloaded and played from any windows computer without the requirement of having python and pygame installed. This will also clean up the game, as it will hide the implementation details and make it appear more professional.
+
+## <a name="how-to-extend-hold"></a>Hold feature
+
+A feature that holds blocks into a certain space with the press of a button can be very useful for players of Colour Block. The hold feature would swap the active block with a block that it currently holds, except in cases where it is empty, in which case it just takes the block and the next block is generated as usual. Implementing such a feature does not appear to be too difficult. Simply create a new variable to represent the held block, which has an initial value of None. Then, append the frame method in the Player class to handle a key stroke that holds blocks. Such an implementation would be simple, but would not account for graphical previews, which is a far more difficult adjustment.
+
+## <a name="how-to-extend-ghost-blocks"></a>Ghost blocks
+
+The ghost feature would allow players to see where a block would land before it actually does. The ghost block would be under the active block at all times, and be located at the bottom-most possible location. This would be very a difficult feature to implement, based on coding the movement of the ghost block to ensure that it stays at the bottom-most possible location. A constant check for suitable ghost block locations, combined with the usage of the filled attribute in the Node class, could be a good starting point.
+
+## <a name="how-to-extend-block-previews"></a>Block previews
+
+Block previews would allow players to see the next few blocks before they appear. An implementation of this function would require additional random number generations, as well as an overhaul of the graphical portion of the game to store the visuals of the previews.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -317,7 +332,7 @@ Colour Block is a rendition of the classic game of Tetris. The game provides a c
     * I implemented all coding aspects of blocks and the behaviours that all the other classes will access. Rotation implementation directly inherited from Harvin's description, with slight modification that is having each rotation being a snapshot to reduce duplicate checks. 
   * README.md contributions
     * I contributed to README.md by adding in the major methods of the blocks. If one wants to modify the behaviour and attributes of the blocks, then these methods are the main point of focus, as they are the main functionalities. I have also added the section in blocks that is the weakest (rotate methods) and could use better implementation, or perhaps reimplementation if one wants to extend the block classes and to improve the algorithmic runtime. 
-    
+
 * Yan Chen (Ryan)
   * Code Contributions
     * My contribution to the code consists of the creation of test files for the Node, Grid classes in the project (node_test.py and grid_test.py).
@@ -329,6 +344,5 @@ Colour Block is a rendition of the classic game of Tetris. The game provides a c
     * I contributed to the code by creating and updating the player class. I created the initial layout of the player class, by planning out neccessary attributes and methods, while also implementing them as the game kept further developing. 
   * README.md contributions
     * I contributed the the README.md by adding and describing all the major methods for the Grid, Player, and Visuals classes. I also added a possible way to extend the project (by making the pygame a windows file).
-    
 
 [Return to Table of Contents](#table-of-contents)
