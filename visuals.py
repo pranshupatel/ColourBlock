@@ -162,10 +162,6 @@ class Visuals:
                 pygame.draw.rect(screen, colour, (pos[0], pos[1], length, length))
         pygame.display.update()
 
-    def show_score(self, screen: pygame.display) -> None:
-        """Display the score in the pause menu, and while current game is running."""
-        # CURRENTLY UNIMPLEMENTED
-
     def pause_game(self, screen: pygame.display) -> bool:
         """ Pause the game until the user presses the resume key
             return true if user wants to resume, false if want to quit
@@ -197,8 +193,6 @@ class Visuals:
         text_rect = score_text.get_rect()
         text_rect.center = (self._width // 2, self._height // 3)
         screen.blit(score_text, text_rect)
-
-        self.show_score(screen)
         
         pygame.display.update()
 

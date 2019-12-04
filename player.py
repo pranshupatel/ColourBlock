@@ -44,13 +44,12 @@ FACTOR = 10
 """ Author: Pranshu Patel """
 class Player:
 
-    """ CHARACTER CLASS
+    """ PLAYER CLASS
         This class represents a character/player in the game. It keeps track of the score and updates the score as the game is played.
         === Private Attributes ===
         _name - The name of the character.
         _time - The amount of seconds the character has been in the game.
         _score - The current score of the character.
-        _history - A list containing all the scores that the character achieved in all previoius games played.
         _block - The current block that the character is in control of.
         _grid - The grid that the current game is using
         _vis - The visuals for the game
@@ -61,7 +60,6 @@ class Player:
     _name: str
     _time: int
     _score: int
-    _history: List[int]
     _block: block.Block
     _grid: Grid
     _vis: Visuals
@@ -124,23 +122,6 @@ class Player:
     def has_quit(self) -> bool:
         """ Return whether the user has quit """
         return self._has_quit
-
-    def update_history(self):
-        """ Update the history of this character after the
-        current game is complete."""
-
-        # CURRENTLY ABSTRACT
-        if self.get_grid.isGameOver():
-            self._history.append(self._score)
-
-    def record_history(self, path: str) -> None:
-        """ Record the character's score history in a text file to
-        the designated path."""
-
-        scores_file = open(path, "w+")
-        scores_file.write(self.get_name() + "'s Score History: \n")
-        for score in self._history:
-            scores_file.write(str(score) + "\n")
 
     def update_score(self) -> None:
         """ Update the current score of the current character to
