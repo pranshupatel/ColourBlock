@@ -136,19 +136,27 @@ All of the Python files exist in the root of the directory. They are all that ar
 
 ## <a name="major-classes-node"></a>Node
 
-The Node class represents one square on the grid. Each Node has 7 attributes: colour, background colour (its default colour), position (in pixel coordinates), length (the amount of pixels long it is), coords (its position in the Grid class, described below), in control (whether this node belongs to a in control block), and is filled (described in Grid).
+The Node class represents one square (enlarged pixel) on the grid. Each instance of Node has seven attributes:
 
-The two most importand attributes however is the colour and coordinates (coords). 
+* colour
+* _background_colour (its default colour)
+* _position (in pixel coordinates)
+* _length (how long it is in actual pixels)
+* _coords (its position in the Grid class, described below)
+* _in_control (whether this node belongs to a in control block)
+* _filled (described in Grid)
 
-A Block class is made up of four Node instances. When a block moves the old Nodes are reset to their original colours and the new nodes changed to the blocks colour. This allows for the user to see the blocks fall when in reality all that happened was Nodes switching colours.
+However, the two most important attributes are colour and _coords (the coordinates).
 
-The structure of the Node class allows for easy movement and rotation of blocks. The Node class is heavily used by other objects to run the game.
+A Block class is made up of four Node instances. When a block moves, the old nodes are reset to their original colours and the new nodes change to their block's colour. This allows the user to see the blocks fall, although this is really an illusion as all that happens is that the nodes switch colours and _filled attributes.
+
+The structure of the Node class allows for the easy movement and rotation of blocks. The Node class is heavily used by other objects to run the game.
 
 ## <a name="major-classes-grid"></a>Grid
 
-The Grid class contains a collection of Node instances arranged into a two-dimensional list of 20 visible rows and 10 columns. (There are actually 24 rows in total, of which the top 4 rows are invisible. This helps facilitate the creation of new blocks.)
+The Grid class contains a collection of Node instances which are arranged into a two-dimensional list of 20 visible rows and 10 columns. (There are actually 24 rows in total, of which the top 4 rows are invisible. This helps facilitate the creation of new blocks.)
 
-The properties of each Node instance in the Grid class can change based on various factors. For example, the filled attribute that enables effective collision detection can change based on whether a block has hit the bottom and has another block right underneath it. As another example, the colour attributes of several Node instances change constantly whenever a block falls to the bottom.
+The properties of each Node instance in the Grid class can change based on various factors. For example, the _filled attribute facilitates effective collision detection, as it can change based on whether a block has hit the bottom and has another block right underneath it. As another example, the colour attributes of several Node instances change constantly as a block falls to the bottom.
 
 Methods in the Grid class handle collision detection, check for full rows to clear, and track scores. The Grid class is heavily used by other objects to run the game.
 
@@ -162,7 +170,7 @@ This class asks the Grid instance to assign colours to the Node instances.
 
 It also contains methods to move and rotate the block, which are called from the Grid instance.
 
-There are seven sub-classes of Block, with each of them corresponding to a particular block.
+There are seven subclasses of Block, with each of them corresponding to a particular block.
 
 Name of block | Image of block
 ------------- | --------------
@@ -178,11 +186,11 @@ L_opposite-block | ![L_opposite-block](/images/L-opp-block.png)
 
 The Visuals class uses pygame to render the graphics and the grid.
 
-The class takes in a Grid and is responsible to rendering it to the user. It does this by going through each Node in the Grid then drawing them. This happens in the render_grid method.
+First, the class takes in an instance of Grid and renders it to the user. The way this class renders the grid is that it goes through each Node in the Grid and draws them. This happens in the render_grid method.
 
-Visuals is also responsible for taking in keyboard input from the user and passing it to the Player class. This is done because pygame is responsible for collecting user input but Visuals lacks the ability to modify the Grid itself. The frame method is what handles this.
+Next, Visuals acquires keyboard input from the user and passes it to the Player class. This is done because pygame is responsible for collecting user input, but Visuals lacks the ability to modify the Grid itself, so it passes the input to Player. The frame method handles this functionality.
 
-Finally, the Visuals class also handles the user pausing and restarting the game. This includes stopping the blocks from moving, rendering text to tell the player the game is over / paused, and resuming the game. These are done in their own methods called pause_game and end_game. 
+Finally, the Visuals class also handles the user pausing and restarting the game. This includes stopping the movement of blocks, rendering text to tell the player the game is over/paused, and resuming the game. These are done in their own methods called pause_game and end_game. 
 
 ## <a name="major-classes-player"></a>Player
 
@@ -208,43 +216,43 @@ This method first checks if the grid has a full line. If it does, it shifts the 
 
 ### <a name="major-methods-block-rotate"></a>rotate (abstract)
 
-This method rotates the specified block that the player currently has control of by 90 degrees. It does this by adjusting the nodes that are stored in it's _nodes attribute to the new rotated position. It should be accessed only through the player class and not from any other. It is called when the player presses the UP arrow key.
+This method rotates the specified active block by 90 degrees clockwise. It does this by adjusting the nodes that are stored in its _nodes attribute to the new rotated position. It should be accessed only through the Player class and not from any other class. It is called when the player presses the **up arrow key**.
 
 ### <a name="major-methods-block-move"></a>move_left / move_right / traverse_down_1row (abstract)
 
-These methods move the specified block to the corresponding direction. It does this by shifting the location of each node in the _nodes attribute by 1 unit towards the corresponsing direction. They should be accessed only through the player class and not from any other. The move methods are called when the player presses the corresponding LEFT, RIGHT, or DOWN arrow keys.
+These methods move the specified block to the corresponding direction. It shifts the location of each node in the _nodes attribute by 1 unit towards the corresponsing direction. They should be accessed only through the Player class and not from any other class. The move methods are called when the player presses the corresponding **left**, **right**, or **down arrow keys**.
 
 ## <a name="major-methods-visuals"></a>Visuals
 
 ### <a name="major-methods-visuals-render-grid"></a>render_grid
 
-This method is responsible for drawing the actual tetris board onto the pygame window. It uses information from it's grid parameter, and draws it accordingly.
+This method is responsible for drawing the actual grid onto the pygame window. It uses information from its grid parameter, and draws it accordingly.
 
 ### <a name="major-methods-visuals-frame"></a>frame
 
-This method is where the main loop of the game is implemented. An infinite loop constantly updates the visuals after every player action is made such as rotate, move, pause game, or end game. The loop only terminates once the grid is completely full, or the player quits the game.
+This method is where the main loop of the game is implemented. An infinite loop constantly updates the visuals after every player action is made, such as rotate, move, pause game, or end game. The loop only terminates once the grid is completely full, or the player quits the game.
 
 ### <a name="major-methods-visuals-play"></a>play
 
-This is the method which starts up the visuals. It initiazes the pygame window, and calls the frame method in order to start up the main loop.
+This is the method which starts up the visuals. It initializes the pygame window, and calls the frame method in order to start up the main loop.
 
 ## <a name="major-methods-player"></a>Player
 
 ### <a name="major-methods-player-create-block"></a>create_block
 
-This method creates a random block instance, and spawns it in the game. It does this by setting the player's _block attribute to the block instance that was created.
+This method creates a random block instance, and spawns it in the game. It sets the player's _block attribute to the block instance that was created.
 
 ### <a name="major-methods-player-move-block"></a>move_block_left, move_block_right, rotate_block, block_fall
 
-All these methods make the specified action to the player's current block. They do this by calling the corresponding move method from the block class that is stored in the player's _block attribute. Each move method checks whether the move is valid first, then makes the move if it is.
+All these methods make the specified action to the player's current block. They call the corresponding move method from the Block class that is stored in the Player class's _block attribute. Each move method checks whether the move is valid first, then makes the move if it is valid.
 
 ### <a name="major-methods-player-clear-lines"></a>clear_lines
 
-This method simply clears the grid's full line (by calling grid.clear_lines()) and updates the player's score to match the score of the grid.
+This method simply clears the grid's full line with a call to grid.clear_lines(), and updates the player's score to match the score of the grid. It also updates the drop speed based on how large the score is (as described in the Obstacles section).
 
 ## <a name="major-methods-block-subclasses"></a>Block subclasses
 
-Each block will have its own colour as an attribute. If one wants a different colour, they simply need to alter this attribute (Do not change the colour of the block to the grid's colour, or else the functionality of the block will not work as intended).
+Each block will have its own colour as an attribute. To obtain a different colour, simply alter this attribute. Do not change the colour of the block to the grid's colour (ie. background colour), or else the functionality of the block will not work as intended.
 
 ### <a name="major-methods-block-subclasses-move-right"></a>move_right (abstract)
 
@@ -260,7 +268,7 @@ Move the block down by 1 node. This method assumes the move is possible before t
 
 ### <a name="major-methods-block-subclasses-rotate"></a>rotate (abstract)
 
-Each block, except for the square_block, will have 4 different snapshots, each representing an orientation of the block. This method checks the current snapshot and rotate to the following snapshot from the current snapshot. This method do not assume the rotate is valid, therefore it checks for the validity of the rotation invocation manually.
+Each block, except for Square-block, will have four different snapshots. Each of them represents some orientation of the block, or in other words, what the block looks like when it is rotated a certain amount. This method checks the current snapshot and rotates to the next snapshot from the current snapshot. This method does not assume the rotation is valid, and so it checks for the validity of the rotation invocation manually.
 
 [Return to Table of Contents](#table-of-contents)
 
