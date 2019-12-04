@@ -2,7 +2,9 @@
 
 ![Colour Block Logo](/images/colourblock-final-2.png)
 
-Created by: Ajitesh Misra, Pranshu Patel, Harvin Lachhar, Long Uy (Wilson) Nguyen, Yan Chen (Ryan) Huang
+Created by Ajitesh Misra, Pranshu Patel, Harvin Lachhar, Long Uy (Wilson) Nguyen, and Yan Chen (Ryan) Huang.
+
+Colour Block was created by a group of computer science students at the University of Toronto, Mississauga. This project was completed as part of a group assignment in the CSC290 course (Communication Skills for Computer Scientists).
 
 # <a name="table-of-contents"></a>Table of Contents
 
@@ -48,8 +50,6 @@ Created by: Ajitesh Misra, Pranshu Patel, Harvin Lachhar, Long Uy (Wilson) Nguye
     * [Convert Game File to Executable](#how-to-extend-executable)
 10. [Closing](#closing)
 11. [Individual Contributions (Addendum)](#individual-contributions-addendum)
-
-Colour Block was created by a group of computer science students at the University of Toronto, Mississauga. This project was completed as part of a group assignment in the CSC290 course (Communication Skills for Computer Scientists).
 
 ![Colour Block Tiny Logo](/images/colourblock-tiny.png)
 
@@ -181,7 +181,7 @@ It also contains methods to move and rotate the block, which are called from the
 There are seven sub-classes of Block, with each of them corresponding to a particular block.
 
 Name of block | Image of block
-- | -
+------------- | --------------
 Square-block | ![Square-block](/images/square-block.png)
 Z-block | ![Z-block](/images/Z-block.png)
 Z_opposite-block | ![Z_opposite-block](/images/Z-opp-block.png)
