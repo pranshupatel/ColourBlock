@@ -218,7 +218,7 @@ This method rotates the specified active block by 90 degrees clockwise. It does 
 
 These methods move the specified block to the corresponding direction. It shifts the location of each node in the _nodes attribute by 1 unit towards the corresponsing direction. They should be accessed only through the Player class and not from any other class. The move methods are called when the player presses the corresponding **left**, **right**, or **down arrow keys**.
 
-Further details about each of these methods can be found in the Block Subclasses subsection in Major Methods.
+Further details about each of these methods can be found in the Block Subclasses subsection of Major Methods.
  
 ## <a name="major-methods-visuals"></a>Visuals
 
