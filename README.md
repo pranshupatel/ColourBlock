@@ -166,7 +166,7 @@ Methods in the Grid class handle collision detection, check for full rows to cle
 
 The Block class contains a reference to four Node instances, whose coordinates are connected together to form a block. The first node in the list is regarded as the center of rotation.
 
-This class asks the Grid instance to assign colours to the Node instances. Grid renders the blocks by accessing the colour of the block, and assigning the colour to the node's required to facilitate the block instances.
+This class asks the Grid instance to assign colours to the Node instances. Grid renders the blocks by accessing the colour of the block, and assigning the colour to the nodes required to facilitate the block instances.
 
 It also contains methods to move and rotate the block, which are called from the Grid instance.
 
@@ -212,13 +212,13 @@ This method first checks if the grid has a full line. If it does, it shifts the 
 
 ### <a name="major-methods-block-rotate"></a>rotate (abstract)
 
-This method rotates the specified active block by 90 degrees clockwise. It does this by adjusting the nodes that are stored in its _nodes attribute to the new rotated position. It should be accessed only through the Player class and not from any other class. It is called when the player presses the **up arrow key**. 
+This method rotates the specified active block by 90 degrees clockwise. It does this by adjusting the nodes that are stored in its _nodes attribute to the new rotated position. It should be accessed only through the Player class and not from any other class. It is called when the player presses the **up arrow key**.
 
 ### <a name="major-methods-block-move"></a>move_left / move_right / traverse_down_1row (abstract)
 
 These methods move the specified block to the corresponding direction. It shifts the location of each node in the _nodes attribute by 1 unit towards the corresponsing direction. They should be accessed only through the Player class and not from any other class. The move methods are called when the player presses the corresponding **left**, **right**, or **down arrow keys**.
 
-Further details about each of the methods can be found in the Major Methods of Block Subclasses section.
+Further details about each of these methods can be found in the Block Subclasses subsection in Major Methods.
  
 ## <a name="major-methods-visuals"></a>Visuals
 
