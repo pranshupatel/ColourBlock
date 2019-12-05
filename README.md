@@ -314,7 +314,7 @@ Colour Block is a rendition of the classic game of Tetris. The game is a challen
 
 * Long Uy Nguyen:
   * Code contributions
-    * I implemented all aspects of blocks attributes and the behaviours that all the other classes access. The rotate implementation is directly inherited from Harvin's description/suggestion, with a slight modification that is having each rotation being a snapshot of the block to reduce duplicate checks. 
+    * I implemented all aspects of blocks, including the attributes and the behaviours that all the other classes would access. The rotate implementation is directly inherited from Harvin's description/suggestion, with a slight modification that is having each rotation being a snapshot of the block to reduce duplicate checks. 
   * README.md contributions
     * I contributed to README.md by adding in the description of the major methods of blocks and editing all description related to blocks. If one wants to modify the behaviour and or the attributes of the blocks, then these areas are the main point of focus, as they are the main functionalities of all the blocks. I have also added to the "How to extend" sections the weakest part of blocks (rotate methods) that could use better implementation, or perhaps to be reinplemented if one wants to extend the block classes to improve the algorithmic runtime.
 
