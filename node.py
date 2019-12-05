@@ -7,8 +7,8 @@ from typing import List, Dict, Tuple
 
 class Node:
     """ NODE CLASS
-        Represents a node on the 20 x 10 grid
-        Each node is 38 x 38 PIXELS long
+        Represents a node on the 20 x 10 grid.
+        Each node is 38 x 38 PIXELS long.
         === Public Variables ===
         colour - The current colour of the node, can be changed
 
@@ -32,9 +32,9 @@ class Node:
     def __init__(self, colour: Tuple[int, int, int], pos: Tuple[int, int],
                 side_length: int, coords: Tuple[int, int]):
         """ Initialize a new node at a given position and colour.
-            Background is also set here
+            The background is also set here.
 
-            pos is the TOP LEFT of the node
+            The parameter pos is the TOP LEFT of the node.
         """
         self.colour = colour
         self._background_colour = colour
@@ -45,19 +45,19 @@ class Node:
         self._filled = False
 
     def get_position(self) -> Tuple[int, int]:
-        """ Return the position of the node
-            in PIXELs
+        """ Return the position of the node 
+            in PIXELs.
         """
         return self._position
 
     def get_coords(self) -> Tuple[int, int]:
         """ Return the position of this node
-            in the grid
+            in the grid.
         """
         return self._coords
 
     def get_colour(self) -> Tuple:
-        """ Return the colour of the node
+        """ Return the colour of the node.
         """
         return self.colour
 
@@ -65,37 +65,37 @@ class Node:
         return self._background_colour
 
     def get_length(self) -> int:
-        """ Return the length of the node
+        """ Return the length of the node.
         """
         return self._length
 
     def get_in_control(self) -> bool:
-        """ Return if this node is in control
+        """ Return if this node is in control.
         """
         return self._in_control
 
     def get_filled(self) -> bool:
-        """ Return if this node is already filled
+        """ Return if this node is already filled.
         """
         return self._filled
 
     def set_colour(self, new_colour: Tuple[int, int, int]) -> None:
-        """ Set the colour of this node to <new_colour>
+        """ Set the colour of this node to <new_colour>.
         """
         self.colour = new_colour
 
     def reset_colour(self) -> None:
-        """ Reset the node to the background colour
+        """ Reset the node to the background colour.
         """
         self.colour = self._background_colour
 
     def set_control(self, status) -> None:
-        """ Change the status of the node if it is in control
+        """ Change the status of the node if it is in control.
         """
         self._in_control = status
 
     def set_filled(self, new_filled: bool) -> None:
-        """ Set the filled status of this node
+        """ Set the filled status of this node.
         """
         self._filled = new_filled
 

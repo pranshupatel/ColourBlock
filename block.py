@@ -6,15 +6,16 @@ from typing import List, Tuple
 
 class Block:
     """
-    Representing a block in the game ColourBlock
-    This is an abstract class, meant to be extended further depending on the
-    type of block inheriting this class
-    colour represent the colour of the respective blocks
-    _blocks represents the Tuple (nodes) that the block is consisted of
-    _in_control is a bool representing whether the user is in control of this
-    block
-    Center of rotation will always be the first node in _nodes
-    Only exception is the I block
+    This represents a block in the game Colour Block.
+    This is an abstract class, which is meant to be extended further
+    depending on the type of block inheriting this class.
+    The attribute colour represents the colour of the respective blocks.
+    The attribute _blocks represents the Tuple of nodes that the block
+    consists of.
+    The attribute _in_control is a bool that represents whether the user
+    is in control of the block.
+    The center of rotation will always be the first node in _nodes. The
+    only exception to this is the I-block.
     """
     _in_control = bool
     _name = str

@@ -1,4 +1,4 @@
-""" This class is meant to have a grid of nodes for the game to take place on
+""" This class is meant to have a grid of nodes for the game to take place on.
 
     Author: Ajitesh Misra
 """
@@ -27,11 +27,11 @@ from random import randint as rand
 class Grid:
     """ GRID CLASS
         This class is a 24 x 10 list of nodes,
-		though only 20 x 10 to be displayed to the screen
-		(This is done so new blocks are spawned off screen)
+	though only 20 x 10 is to be displayed to the screen.
+	(This is done so that new blocks are spawned off screen.)
 
         === Private Variables ===
-        _Width - the size of the game window width in PIXELS
+        _width - the size of the game window width in PIXELS
         _Height - the size of the game window width in PIXELS
         _nodes - The list of nodes
         _padding - the amount of PIXELS between each node
@@ -43,7 +43,7 @@ class Grid:
 
     _width: int
     _height: int
-    _nodes: List[List[Node]] #of Nodes
+    _nodes: List[List[Node]] # of Nodes
     _padding: int
     _colour: Tuple[int, int, int]
     _left_offset: int
@@ -51,12 +51,13 @@ class Grid:
     _is_over: bool
 
     def __init__(self, width: int, height: int, padding, colour: Tuple[int, int, int], offset=0):
-        """ Create a new grid based on the resolution of the game window
-            This is to make sure the nodes fill the height of the window while also being square
+        """ Create a new grid based on the resolution of the game window.
+            This is to make sure the nodes fill the height of the window,
+	    while also being square.
 
-            ASSUMES: height is smaller than width
+            ASSUMES: height is smaller than width.
 
-            ALL GRIDS WILL BE 24 X 10
+            ALL GRIDS WILL BE 24 X 10.
         """
         self._width = width
         self._height = height
@@ -69,40 +70,40 @@ class Grid:
         self.create_grid()
 
     def create_grid(self) -> None:
-        """ Fill self._nodes with the array
-            Creates the nodes so that they are
+        """ Fill self._nodes with the array.
+            Creates the nodes so that they are.
         """
-        # the size of each node is 1/20 the height of the grid
+        # The size of each node is 1/20 the height of the grid.
         real_length = self._height // 20
 
-        # decrease the size of the node depending on the padding
+        # Decrease the size of the node depending on the padding.
         length = real_length - self._padding
         if length < 1:
             length = 1
 
 		# NOTE:
-		# pos x and y need to be init 1 space before they start
-		# so that when they increment the first node is in the
-		# correct place
+		# pos x and y need to be init 1 space before they start,
+		# so that when they increment, the first node is in the
+		# correct place.
         pos_x = self._left_offset - real_length
         pos_y = -real_length * 5
         for y in range(24):
             self._nodes.append([])
             pos_y += real_length
             for x in range(10):
-                # create a node
+                # Create a node
 
-                # move into current positon
+                # Move into current positon
                 pos_x += real_length
 
                 pos = (pos_x, pos_y)
                 node = Node(self._colour, pos, length, (x, y))
                 self._nodes[y].append(node)
-			# reset x to left
+			# Reset x to left
             pos_x = self._left_offset - real_length
 
     def print_grid(self) -> None:
-        """ Print the grid in a readable way
+        """ Print the grid in a readable way.
         """
         for i in self._nodes:
             print(i)
@@ -111,80 +112,82 @@ class Grid:
         return self._colour
 
     def get_nodes(self) -> List[List[Node]]:
-        """ Return the nodes of the grids
+        """ Return the nodes of the grids.
         """
         return self._nodes
 
     def get_score(self) -> int:
-        """ Return the total score of the current game
+        """ Return the total score of the current game.
         """
         return self._score
 
     def is_line_full(self, index: int) -> bool:
-        """ Return true iff line at index is full
-            i.e. : the colours of each node is different
-                    than the background colour
+        """ Return true iff line at index is full.
+            i.e. : the colours of each node are different
+                    than the background colour and the
+		    nodes are filled.
         """
-		# go through the row, see if any not occupied
+	# Go through the row and see if any nodes are not occupied.
         for node in self._nodes[index]:
             if node.get_colour() == self._colour or \
 	        (not node.get_filled()):
                 return False
-        # all blocks are different colours
+        # All blocks are different colours and all are filled.
         return True
 
     def is_line_clear(self, index: int) -> bool:
-        """ Return true iff line at index is clear
-            i.e. : the colours of each node is the same
+        """ Return true iff line at index is clear.
+            i.e. : the colours of each node are the same
                     as the background colour and the
-                    nodes are not filled
+                    nodes are not filled.
         """
-	# go through the row, see if any occupied
+	# Go through the row and see if any nodes are occupied.
         for node in self._nodes[index]:
             if node.get_colour() != self._colour or \
 	        node.get_filled():
                 return False
-        # all blocks are same colours and not filled
+        # All blocks are the same colours and none are filled.
         return True
 
     def set_game_over(self) -> None:
-        """ Set the game to be over, 
-            ONLY TO BE CALLED FROM PLAYER
+        """ Set the game to be over.
+            ONLY TO BE CALLED FROM PLAYER.
         """
         self._is_over = True
 
     def is_game_over(self) -> bool:
-        """ Return True iff player can not make a new move
-            Checked in the player script, this just return the value
+        """ Return True iff player can not make a new move.
+            (The check occurs in the player script.
+	    This just returns the value.)
         """
         return self._is_over
 
     def reset_row(self, index: int) -> None:
         """ Make the nodes of row <index> the
-            Background colour again and un-fill them
+            background colour again and un-fill them.
         """
         for i in range(len(self._nodes[index])):
             self._nodes[index][i].reset_colour()
             self._nodes[index][i].set_filled(False)
 
     def clear_lines(self) -> None:
-        """ Clear any lines that are full
-            Add to score as needed
+        """ Clear any lines that are full.
+            Add to score as needed.
         """
         lines_cleared = 0
 
-        # go through the bottom rows
+        # Go through the bottom rows.
         for i in range(len(self.get_nodes())):
             if self.is_line_full(i):
-                # line is full
+                # Line is full
                 self.reset_row(i)
                 lines_cleared += 1
 
-        # increase score according to project plan
-        if lines_cleared != 0: # only increase if line has been cleared
+        # Increase score, according to project plan.
+        if lines_cleared != 0: # Only increase if line has been cleared.
             self._score += 50 * (2 ** lines_cleared)
 	
-	# fill in newly cleared rows with above nodes
+	# Fill in newly cleared rows with above nodes.
         y = 23
         while y > 0:
             if self.is_line_clear(y):

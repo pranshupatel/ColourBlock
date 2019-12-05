@@ -1,4 +1,4 @@
-""" This class is meant to display the game to the player
+""" This class is meant to display the game to the player.
 
     In MCV model, this is the VIEW
 
@@ -11,14 +11,14 @@ from grid import Grid
 from node import Node
 
 class Visuals:
-    """ This class is the front end of the game
-        It is meant to be able to take in a grid and render it 
+    """ This class is the front end of the game.
+        It is meant to be able to take in a grid and render it.
 
 
         === PRIVATES ===
         _width: the width of the window in PIXELS
         _height: the height of the window in PIXELS
-        _tick_lenth: the ms between each update
+        _tick_length: the ms between each update
         _font: the font to use in pygame
         _player: the controller class this game is using
         _move_delay: the length of time between each user move
@@ -31,16 +31,16 @@ class Visuals:
     _height: int
     _tick_length: int
     _font: str
-    _player: None # By Default, will be type character if not None
+    _player: None # By Default, _player will be type player if not None
     _move_delay: int
     _quick_drop: True
     _quick_drop_factor: int
     _quit: bool
 
     def __init__(self, width: int, height: int, tick: int, font: str, controller=None, move_delay=50, factor=8):
-        """ Width, height, tick speed and font for the pygame window
-            Controller refers to the character class if one is assinged
-            This allows us to update the script of any user input
+        """ Width, height, tick speed and font for the pygame window.
+            Controller refers to the character class if one is assigned.
+            This allows us to update the script of any user input.
 
         """
         self._width = width
@@ -56,36 +56,35 @@ class Visuals:
         self._quit = False
 
     def play(self, grid: Grid) -> None:
-        """ Set up a pygame window with the passed in grid """
+        """ Set up a pygame window with the grid passed in as a parameter. """
         # Start pygame
         pygame.init()
         screen = pygame.display.set_mode((self._width, self._height))
         pygame.display.set_caption("Colour Block")
 
         self.frame(screen, grid)
-        # if here then user lost the game
+        # If here, then user lost the game
         if not self._quit:
-            # only call end game if game not over
+            # Only call end_game if game is not over
             self.end_game(screen, grid)
 
     def update_tick(self, new_tick:int) -> None:
-        """ Update the tick length to the new tick length
+        """ Update the tick length to the new tick length.
         """
         self._tick_length = new_tick
 
     def frame(self, screen: pygame.display , grid: Grid) -> None:
-        """ Runs every frame of the game
-
-            Takes in a grid to display
+        """ Runs every frame of the game.
+            Takes in a grid to display.
         """
 
-        # store ref for what action to take next tick
+        # Store ref for what action to take next tick
         actions = "_"
 
         while(True):
-            # pull from grid
+            # Pull from grid
             self.render_grid(screen, grid)            
-            # go through all events on pygame
+            # Go through all events on pygame
             keep_playing = True
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
@@ -99,30 +98,30 @@ class Visuals:
                         keep_playing = self.pause_game(screen)
 
                 if event.type == pygame.QUIT or not keep_playing:
-                    # user closed the window
+                    # User closed the window
                     print("user closed game")
                     self._quit = True
-                    # stop the game
+                    # Stop the game
                     pygame.quit()
                     self.quit_game()
                     return
 
 
 
-            # check if user wants to increase block fall speed
+            # Check if user wants to increase block fall speed
 
-            # tick len * 1 is normal
+            # tick_len * 1 is normal
             speed_scale = 1
 
             pressed_keys = pygame.key.get_pressed()
             self._quick_drop = pressed_keys[pygame.K_DOWN]
             if self._quick_drop:
-                # 1/2 * tick len means it comes up twice as often
+                # 1/2 * tick_len means it comes up twice as often
                 speed_scale = 1/self._quick_drop_factor          
 
-            # execute player move
+            # Execute player move
             if pygame.time.get_ticks() % self._move_delay == 0:
-                # begin switch case
+                # Begin switch case
                 if actions == "left":
                     self._player.play_move(-1)
                 elif actions == "right":
@@ -134,7 +133,7 @@ class Visuals:
             # Drop the block by 1 row
             if pygame.time.get_ticks() % (self._tick_length * speed_scale) == 0:
                 
-                # if the game is over do nothing
+                # If the game is over, do nothing
                 if grid.is_game_over():
                     return
 
@@ -143,16 +142,16 @@ class Visuals:
                     self._player.block_fall()
 
     def render_grid(self, screen: pygame.display, grid: Grid) -> None:
-        """ Draw the grid on a pygame window
+        """ Draw the grid on a pygame window.
         """
-        # reset the screen to black
+        # Reset the screen to black
         screen.fill((0,0,0))
 
         nodes = grid.get_nodes()
 
-        # NOTE: Render only the bottom 20 
+        # NOTE: Render only the bottom 20. 
         #       This is so new blocks can be spawned 
-        #       Out of the players view
+        #       out of the player's view.
         for line in nodes[4:]:
             for node in line:
                 pos = node.get_position()
@@ -163,19 +162,20 @@ class Visuals:
         pygame.display.update()
 
     def pause_game(self, screen: pygame.display) -> bool:
-        """ Pause the game until the user presses the resume key
-            return true if user wants to resume, false if want to quit
+        """ Pause the game until the user presses the resume key.
+            Return true if the user wants to resume, or false if
+            the user wants to quit.
         """
         print("game paused")
 
-        # open menu
+        # Open menu
         surface = pygame.Surface((self._width, self._height))
         surface.set_alpha(128)
         surface.fill((84,89,97))
 
         screen.blit(surface, (0,0))
 
-        # draw the text
+        # Draw the text
         font = pygame.font.SysFont(self._font, 32)
 
         pause_text = font.render("paused", True, (255,255,255))
@@ -196,32 +196,32 @@ class Visuals:
         
         pygame.display.update()
 
-        # pause the game
+        # Pause the game
         while True:
             for event in pygame.event.get():
-                # player wants to quit
+                # Player wants to quit
                 if event.type == pygame.QUIT:
                     return False
-                # player wants to resume
+                # Player wants to resume
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         return True
     
     def end_game(self, screen: pygame.display ,grid: Grid) -> None:
-        """ Run when the game is over
-            Display the score
+        """ Run when the game is over.
+            Display the score.
         """
         print("game is over")
         print("final score = ", grid.get_score())
 
-        # open menu
+        # Open menu
         surface = pygame.Surface((self._width, self._height))
         surface.set_alpha(128)
         surface.fill((0,0,0))
 
         screen.blit(surface, (0,0))
 
-        # draw the text
+        # Draw the text
         font = pygame.font.SysFont(self._font, 32)
 
         pause_text = font.render("Game Over", True, (255,255,255))
@@ -248,15 +248,15 @@ class Visuals:
 
         restart = False
 
-        # wait for player to hit a key to restart
+        # Wait for player to hit a key to restart
         while not restart:
             for event in pygame.event.get():
-                # player wants to quit
+                # Player wants to quit
                 if event.type == pygame.QUIT:
                     self._quit = True
                     self.quit_game()
                     return False
-                # player wants to restart
+                # Player wants to restart
                 if event.type == pygame.KEYDOWN:
                     restart = True
 
@@ -265,9 +265,9 @@ class Visuals:
 
     def quit_game(self) -> None:
         """ After the user has closed pygame window,
-            exit the loop in game.py
+            exit the loop in game.py.
 
-            Do this by sending to player that game is over and do not 
-            restart the game
+            Do this by sending to the player that the game is over,
+            and do not restart the game.
         """
         self._player.lose(False)
