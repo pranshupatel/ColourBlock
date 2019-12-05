@@ -212,12 +212,14 @@ This method first checks if the grid has a full line. If it does, it shifts the 
 
 ### <a name="major-methods-block-rotate"></a>rotate (abstract)
 
-This method rotates the specified active block by 90 degrees clockwise. It does this by adjusting the nodes that are stored in its _nodes attribute to the new rotated position. It should be accessed only through the Player class and not from any other class. It is called when the player presses the **up arrow key**.
+This method rotates the specified active block by 90 degrees clockwise. It does this by adjusting the nodes that are stored in its _nodes attribute to the new rotated position. It should be accessed only through the Player class and not from any other class. It is called when the player presses the **up arrow key**. 
 
 ### <a name="major-methods-block-move"></a>move_left / move_right / traverse_down_1row (abstract)
 
 These methods move the specified block to the corresponding direction. It shifts the location of each node in the _nodes attribute by 1 unit towards the corresponsing direction. They should be accessed only through the Player class and not from any other class. The move methods are called when the player presses the corresponding **left**, **right**, or **down arrow keys**.
 
+Further details about each of the methods can be found in the Major Methods of Block Subclasses section.
+ 
 ## <a name="major-methods-visuals"></a>Visuals
 
 ### <a name="major-methods-visuals-render-grid"></a>render_grid
@@ -250,19 +252,19 @@ This method simply clears the grid's full line with a call to grid.clear_lines()
 
 Each block will have its own colour as an attribute. To obtain a different colour, simply alter this attribute. Do not change the colour of the block to the grid's colour (ie. background colour), or else the functionality of the block will not work as intended since the move validity depends on the colour difference.
 
-### <a name="major-methods-block-subclasses-move-right"></a>move_right (abstract)
+### <a name="major-methods-block-subclasses-move-right"></a>move_right
 
-Move the block to the right by 1 node. This method assumes the move is possible before the invocation of this method.
+Move the respective block to the right by 1 node. This method assumes the move is possible before the invocation of this method.
 
-### <a name="major-methods-block-subclasses-move-left"></a>move_left (abstract)
+### <a name="major-methods-block-subclasses-move-left"></a>move_left
 
-Move the block to the left by 1 node. This method assumes the move is possible before the invocation of this method.
+Move the respective block to the left by 1 node. This method assumes the move is possible before the invocation of this method.
 
-### <a name="major-methods-block-subclasses-traverse"></a>traverse_down_1row (abstract)
+### <a name="major-methods-block-subclasses-traverse"></a>traverse_down_1row
 
-Move the block down by 1 node. This method assumes the move is possible before the invocation of this method.
+Move the respective block down by 1 node. This method assumes the move is possible before the invocation of this method.
 
-### <a name="major-methods-block-subclasses-rotate"></a>rotate (abstract)
+### <a name="major-methods-block-subclasses-rotate"></a>rotate
 
 Each block, except for Square-block, will have four different snapshots. Each of them represents a particular orientation of the block, or in other words, what the block looks like when it is rotated. This method checks the current snapshot and rotates to the next snapshot from the current snapshot. This method does not assume the rotation is valid, and so it checks for the validity of the rotation invocation manually.
 
