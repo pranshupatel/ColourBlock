@@ -166,7 +166,7 @@ Methods in the Grid class handle collision detection, check for full rows to cle
 
 The Block class contains a reference to four Node instances, whose coordinates are connected together to form a block. The first node in the list is regarded as the center of rotation.
 
-This class asks the Grid instance to assign colours to the Node instances.
+This class asks the Grid instance to assign colours to the Node instances. Grid renders the blocks by accessing the colour of the block, and assigning the colour to the node's required to facilitate the block instances.
 
 It also contains methods to move and rotate the block, which are called from the Grid instance.
 
@@ -248,7 +248,7 @@ This method simply clears the grid's full line with a call to grid.clear_lines()
 
 ## <a name="major-methods-block-subclasses"></a>Block subclasses
 
-Each block will have its own colour as an attribute. To obtain a different colour, simply alter this attribute. Do not change the colour of the block to the grid's colour (ie. background colour), or else the functionality of the block will not work as intended.
+Each block will have its own colour as an attribute. To obtain a different colour, simply alter this attribute. Do not change the colour of the block to the grid's colour (ie. background colour), or else the functionality of the block will not work as intended since the move validity depends on the colour difference.
 
 ### <a name="major-methods-block-subclasses-move-right"></a>move_right (abstract)
 
@@ -264,7 +264,7 @@ Move the block down by 1 node. This method assumes the move is possible before t
 
 ### <a name="major-methods-block-subclasses-rotate"></a>rotate (abstract)
 
-Each block, except for Square-block, will have four different snapshots. Each of them represents some orientation of the block, or in other words, what the block looks like when it is rotated a certain amount. This method checks the current snapshot and rotates to the next snapshot from the current snapshot. This method does not assume the rotation is valid, and so it checks for the validity of the rotation invocation manually.
+Each block, except for Square-block, will have four different snapshots. Each of them represents a particular orientation of the block, or in other words, what the block looks like when it is rotated. This method checks the current snapshot and rotates to the next snapshot from the current snapshot. This method does not assume the rotation is valid, and so it checks for the validity of the rotation invocation manually.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -272,7 +272,7 @@ Each block, except for Square-block, will have four different snapshots. Each of
 
 ## <a name="how-to-extend-rotation"></a>Rotation
 
-One aspect to extend, or perhaps improve, is the rotation methods. Currently, with its messy manual algorithm, the code suffers from a lack of readability and performance. The method does the switch by changing three out of the four nodes of the block to the nodes of its next snapshot. (For non-square- and non-I-blocks, one node stays constant/unchanged as the center of rotation.) One possible improvement is to have better communication between the Visuals class, the Player class, and the block in control to shorten the rotation algorithm. To follow the same design pattern with the verification of the move conducted by the Player class, one could perhaps move the validity check of the rotation outside of the block classes.
+One aspect to extend, or perhaps improve, is the rotation methods. Currently, with its messy manual algorithm, the code suffers from a lack of readability and performance. The methods could use better implementation. The method does the switch by changing three out of the four nodes of the block to the nodes of its next snapshot. (For non-square- and non-I-blocks, one node stays constant/unchanged as the center of rotation). One possible improvement is to have better communication between the Visuals class, the Player class, and the block in control to shorten the rotation algorithm. To follow the same design pattern with the the move validation conducted by the Player class, one could move the validity check of the rotation outside of the block classes and into the Player class. 
 
 ## <a name="how-to-extend-hold"></a>Hold feature
 
@@ -312,11 +312,11 @@ Colour Block is a rendition of the classic game of Tetris. The game is a challen
     * README.md contributions
         * I edited and added new additions to How to Play, Code structure and Major Classes. I also added the content of Description of Directory Structure. These new additions are further expanding on how to play by making it more descriptive, adding more detail to code structure so that it is easier to understand and expanded on the classes I worked on in the Major Classes section. For Description of Directory I explained how the code was laid out and explained the other folders used in the repo. 
 
-* Wilson:
+* Long Uy Nguyen:
   * Code contributions
-    * I implemented all coding aspects of blocks and the behaviours that all the other classes will access. Rotation implementation directly inherited from Harvin's description, with slight modification that is having each rotation being a snapshot to reduce duplicate checks. 
+    * I implemented all aspects of blocks attributes and the behaviours that all the other classes access. The rotate implementation is directly inherited from Harvin's description/suggestion, with a slight modification that is having each rotation being a snapshot of the block to reduce duplicate checks. 
   * README.md contributions
-    * I contributed to README.md by adding in the major methods of the blocks. If one wants to modify the behaviour and attributes of the blocks, then these methods are the main point of focus, as they are the main functionalities. I have also added the section in blocks that is the weakest (rotate methods) and could use better implementation, or perhaps reimplementation if one wants to extend the block classes and to improve the algorithmic runtime. 
+    * I contributed to README.md by adding in the description of the major methods of blocks and editing all description related to blocks. If one wants to modify the behaviour and or the attributes of the blocks, then these areas are the main point of focus, as they are the main functionalities of all the blocks. I have also added to the "How to extend" sections the weakest part of blocks (rotate methods) that could use better implementation, or perhaps to be reinplemented if one wants to extend the block classes to improve the algorithmic runtime.
 
 * Yan Chen (Ryan)
   * Code Contributions
