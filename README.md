@@ -266,7 +266,7 @@ Move the respective block down by 1 node. This method assumes the move is possib
 
 ### <a name="major-methods-block-subclasses-rotate"></a>rotate
 
-Each block, except for Square-block, will have four different snapshots. Each of them represents a particular orientation of the block, or in other words, what the block looks like when it is rotated. This method checks the current snapshot and rotates to the next snapshot from the current snapshot. This method does not assume the rotation is valid, and so it checks for the validity of the rotation invocation manually.
+Each block, except for Square-block, will have four different snapshots. Each of these snapshots represents a particular orientation of the block, or in other words, what the block looks like when it is rotated. This method checks the current snapshot and rotates to the next snapshot from the current snapshot. This method does not assume the rotation is valid, and so it checks for the validity of the rotation invocation manually.
 
 [Return to Table of Contents](#table-of-contents)
 
@@ -274,7 +274,7 @@ Each block, except for Square-block, will have four different snapshots. Each of
 
 ## <a name="how-to-extend-rotation"></a>Rotation
 
-One aspect to extend, or perhaps improve, is the rotation methods. Currently, with its messy manual algorithm, the code suffers from a lack of readability and performance. The methods could use better implementation. The method does the switch by changing three out of the four nodes of the block to the nodes of its next snapshot. (For non-square- and non-I-blocks, one node stays constant/unchanged as the center of rotation). One possible improvement is to have better communication between the Visuals class, the Player class, and the block in control to shorten the rotation algorithm. To follow the same design pattern with the the move validation conducted by the Player class, one could move the validity check of the rotation outside of the block classes and into the Player class. 
+One aspect to extend, or perhaps improve, is the rotation methods. Currently, with its messy manual algorithm, the code suffers from a lack of readability and performance. The methods could use better implementation. The method does the switch by changing three out of the four nodes of the block to the nodes of its next snapshot. (For non-square- and non-I-blocks, one node stays constant/unchanged as the center of rotation.) One possible improvement is to have better communication between the Visuals class, the Player class, and the block in control to shorten the rotation algorithm. To follow the same design pattern with the the move validation conducted by the Player class, one could move the validity check of the rotation outside of the block classes and into the Player class. 
 
 ## <a name="how-to-extend-hold"></a>Hold feature
 
